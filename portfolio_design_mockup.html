@@ -1,0 +1,263 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap');
+  :root {
+    --brand: #0F1117;
+    --accent: #C8FF00;
+    --accent2: #00D4FF;
+    --muted: #6B7280;
+    --surface: #1A1D27;
+    --surface2: #22263A;
+    --border: rgba(255,255,255,0.08);
+    --text: #F1F0EC;
+    --text2: #A8A99E;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body, #root { background: transparent; }
+  .pf { font-family: 'Syne', sans-serif; background: #0F1117; color: var(--text); border-radius: 16px; overflow: hidden; min-height: 900px; }
+  
+  /* NAV */
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 32px; border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 20px; letter-spacing: -0.5px; }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 28px; font-size: 13px; font-weight: 600; letter-spacing: 0.04em; color: var(--text2); }
+  .nav-links a { cursor: pointer; transition: color .2s; text-decoration: none; color: var(--text2); }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta { background: var(--accent); color: #0F1117; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; padding: 8px 18px; border-radius: 40px; cursor: pointer; text-transform: uppercase; }
+  
+  /* HERO */
+  .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 0; min-height: 480px; }
+  .hero-left { padding: 52px 32px 40px; display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid var(--border); }
+  .hero-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; }
+  .hero-tag-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .hero-title { font-family: 'DM Serif Display', serif; font-size: 52px; line-height: 1.05; letter-spacing: -1px; margin-bottom: 20px; }
+  .hero-title em { font-style: italic; color: var(--accent2); }
+  .hero-desc { font-size: 14px; line-height: 1.75; color: var(--text2); max-width: 380px; margin-bottom: 32px; }
+  .hero-btns { display: flex; gap: 12px; }
+  .btn-primary { background: var(--accent); color: #0F1117; font-size: 13px; font-weight: 700; padding: 12px 24px; border-radius: 8px; cursor: pointer; border: none; }
+  .btn-ghost { background: transparent; color: var(--text); font-size: 13px; font-weight: 600; padding: 12px 24px; border-radius: 8px; border: 1px solid var(--border); cursor: pointer; }
+  .hero-right { padding: 40px 32px; display: flex; flex-direction: column; justify-content: space-between; }
+  
+  /* STACK PILLS */
+  .stack-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+  .stack-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .stack-pill { display: flex; align-items: center; gap: 10px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+  .stack-icon { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-family: 'DM Mono', monospace; font-weight: 500; flex-shrink: 0; }
+  .icon-blue { background: rgba(0,212,255,0.12); color: var(--accent2); }
+  .icon-green { background: rgba(200,255,0,0.10); color: var(--accent); }
+  .icon-orange { background: rgba(255,140,0,0.12); color: #FF8C00; }
+  .icon-pink { background: rgba(255,100,160,0.12); color: #FF64A0; }
+  .icon-purple { background: rgba(160,100,255,0.12); color: #A064FF; }
+  .icon-teal { background: rgba(0,200,180,0.12); color: #00C8B4; }
+  .stack-name { font-size: 12px; font-weight: 600; }
+  .stack-sub { font-size: 10px; color: var(--text2); }
+  
+  /* STATS BAR */
+  .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .stat-item { padding: 20px 24px; border-right: 1px solid var(--border); }
+  .stat-item:last-child { border-right: none; }
+  .stat-num { font-family: 'DM Serif Display', serif; font-size: 32px; letter-spacing: -1px; }
+  .stat-num span { color: var(--accent); }
+  .stat-label { font-size: 11px; color: var(--text2); margin-top: 2px; }
+  
+  /* SECTIONS */
+  .section { padding: 40px 32px; border-bottom: 1px solid var(--border); }
+  .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+  .section-title { font-family: 'DM Serif Display', serif; font-size: 28px; }
+  .section-link { font-size: 12px; font-weight: 600; color: var(--accent); letter-spacing: 0.05em; cursor: pointer; }
+  
+  /* PROJECT CARDS */
+  .projects-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  .project-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; cursor: pointer; transition: border-color .2s, transform .2s; position: relative; overflow: hidden; }
+  .project-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); opacity: 0; transition: opacity .2s; }
+  .project-card:hover::before { opacity: 1; }
+  .project-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; margin-bottom: 10px; }
+  .tag-mobile { background: rgba(160,100,255,0.15); color: #A064FF; }
+  .tag-web { background: rgba(0,212,255,0.12); color: var(--accent2); }
+  .tag-devops { background: rgba(255,140,0,0.12); color: #FF8C00; }
+  .tag-python { background: rgba(200,255,0,0.1); color: var(--accent); }
+  .project-name { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .project-desc { font-size: 12px; color: var(--text2); line-height: 1.6; margin-bottom: 14px; }
+  .project-stack { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tech-chip { font-size: 10px; font-family: 'DM Mono', monospace; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 4px; padding: 2px 7px; color: var(--text2); }
+  
+  /* EXPERIENCE */
+  .exp-list { display: flex; flex-direction: column; gap: 16px; }
+  .exp-item { display: flex; gap: 20px; padding: 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
+  .exp-dot-col { display: flex; flex-direction: column; align-items: center; padding-top: 4px; }
+  .exp-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  .exp-line { width: 1px; background: var(--border); flex: 1; margin-top: 6px; }
+  .exp-role { font-size: 14px; font-weight: 700; }
+  .exp-company { font-size: 12px; color: var(--accent2); font-weight: 600; margin-bottom: 4px; }
+  .exp-date { font-size: 11px; color: var(--text2); font-family: 'DM Mono', monospace; }
+  .exp-desc { font-size: 12px; color: var(--text2); line-height: 1.65; margin-top: 8px; }
+  
+  /* CONTACT STRIP */
+  .contact-strip { padding: 32px 32px; display: flex; align-items: center; justify-content: space-between; }
+  .contact-title { font-family: 'DM Serif Display', serif; font-size: 22px; }
+  .contact-title em { font-style: italic; color: var(--accent2); }
+  .contact-links { display: flex; gap: 10px; }
+  .contact-btn { font-size: 12px; font-weight: 700; padding: 10px 18px; border-radius: 8px; cursor: pointer; letter-spacing: 0.04em; border: none; }
+  .cb-solid { background: var(--accent); color: #0F1117; }
+  .cb-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+
+  /* TAB NAV */
+  .tab-bar { display: flex; gap: 0; border-bottom: 1px solid var(--border); padding: 0 32px; }
+  .tab { padding: 14px 20px; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; border-bottom: 2px solid transparent; color: var(--text2); transition: color .2s, border-color .2s; }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+</style>
+
+<div class="pf">
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-logo">dev<span>.</span>portfolio</div>
+    <div class="nav-links">
+      <a>Work</a>
+      <a>Experience</a>
+      <a>Stack</a>
+      <a>About</a>
+    </div>
+    <div class="nav-cta">Hire Me</div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-left">
+      <div>
+        <div class="hero-tag"><span class="hero-tag-dot"></span>Available for work</div>
+        <h1 class="hero-title">Full-Stack<br><em>Engineer</em><br>& DevOps</h1>
+        <p class="hero-desc">I build elegant mobile experiences in Flutter, scalable Python backends, and cloud-native infrastructure that doesn't break at 3am.</p>
+        <div class="hero-btns">
+          <button class="btn-primary">View Projects</button>
+          <button class="btn-ghost">Download CV</button>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="stack-label">Tech Stack</div>
+      <div class="stack-grid">
+        <div class="stack-pill">
+          <div class="stack-icon icon-purple">Fl</div>
+          <div><div class="stack-name">Flutter</div><div class="stack-sub">Mobile / Dart</div></div>
+        </div>
+        <div class="stack-pill">
+          <div class="stack-icon icon-blue">Rj</div>
+          <div><div class="stack-name">React.js</div><div class="stack-sub">Frontend</div></div>
+        </div>
+        <div class="stack-pill">
+          <div class="stack-icon icon-green">Py</div>
+          <div><div class="stack-name">Python</div><div class="stack-sub">Backend / ML</div></div>
+        </div>
+        <div class="stack-pill">
+          <div class="stack-icon icon-orange">Dj</div>
+          <div><div class="stack-name">Django</div><div class="stack-sub">REST APIs</div></div>
+        </div>
+        <div class="stack-pill">
+          <div class="stack-icon icon-teal">K8</div>
+          <div><div class="stack-name">Kubernetes</div><div class="stack-sub">Orchestration</div></div>
+        </div>
+        <div class="stack-pill">
+          <div class="stack-icon icon-pink">CI</div>
+          <div><div class="stack-name">CI/CD</div><div class="stack-sub">DevOps</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat-item"><div class="stat-num">12<span>+</span></div><div class="stat-label">Projects shipped</div></div>
+    <div class="stat-item"><div class="stat-num">4<span>y</span></div><div class="stat-label">Experience</div></div>
+    <div class="stat-item"><div class="stat-num">6<span>+</span></div><div class="stat-label">Tech stacks</div></div>
+    <div class="stat-item"><div class="stat-num">3<span>x</span></div><div class="stat-label">Cloud providers</div></div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tab-bar">
+    <div class="tab active">Projects</div>
+    <div class="tab">Experience</div>
+    <div class="tab">Open Source</div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Selected Work</div>
+      <div class="section-link">All projects →</div>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <span class="project-tag tag-mobile">Flutter</span>
+        <div class="project-name">HealthTrack Mobile</div>
+        <div class="project-desc">Cross-platform health monitoring app with real-time BLE sensor integration and offline-first sync.</div>
+        <div class="project-stack">
+          <span class="tech-chip">Flutter</span><span class="tech-chip">Dart</span><span class="tech-chip">Firebase</span><span class="tech-chip">BLE</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <span class="project-tag tag-web">React</span>
+        <div class="project-name">Admin Dashboard</div>
+        <div class="project-desc">Data-dense ops dashboard serving 50k+ daily active users. Real-time WebSocket updates.</div>
+        <div class="project-stack">
+          <span class="tech-chip">React</span><span class="tech-chip">Django</span><span class="tech-chip">Redis</span><span class="tech-chip">PostgreSQL</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <span class="project-tag tag-devops">DevOps</span>
+        <div class="project-name">Zero-Downtime Pipeline</div>
+        <div class="project-desc">Blue-green deployment pipeline with automated rollback, canary releases and full observability.</div>
+        <div class="project-stack">
+          <span class="tech-chip">K8s</span><span class="tech-chip">Helm</span><span class="tech-chip">ArgoCD</span><span class="tech-chip">Prometheus</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Experience</div>
+    </div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <div class="exp-dot-col"><div class="exp-dot"></div><div class="exp-line"></div></div>
+        <div style="flex:1">
+          <div class="exp-role">Senior Software Engineer</div>
+          <div class="exp-company">Acme Technologies</div>
+          <div class="exp-date">2022 – Present · Full-time</div>
+          <div class="exp-desc">Led mobile squad building Flutter apps for 200k users. Architected Django microservices and migrated infrastructure to EKS.</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end">
+          <span class="tech-chip">Flutter</span><span class="tech-chip">Django</span><span class="tech-chip">AWS</span>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-dot-col"><div class="exp-dot" style="background:var(--accent2)"></div></div>
+        <div style="flex:1">
+          <div class="exp-role">Backend Engineer</div>
+          <div class="exp-company">StartupXYZ</div>
+          <div class="exp-date">2020 – 2022 · Full-time</div>
+          <div class="exp-desc">Built Python automation pipelines and REST APIs. Introduced Docker and GitHub Actions CI/CD reducing deploy times by 70%.</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end">
+          <span class="tech-chip">Python</span><span class="tech-chip">Docker</span><span class="tech-chip">GCP</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="contact-strip">
+    <div>
+      <div class="contact-title">Let's build something <em>remarkable</em></div>
+      <div style="font-size:12px;color:var(--text2);margin-top:4px;">Open to full-time, freelance & consulting</div>
+    </div>
+    <div class="contact-links">
+      <button class="contact-btn cb-solid">Get in touch</button>
+      <button class="contact-btn cb-outline">GitHub</button>
+      <button class="contact-btn cb-outline">LinkedIn</button>
+    </div>
+  </div>
+</div>
