@@ -1,0 +1,309 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Bricolage+Grotesque:wght@300;500;700;800&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .wrap {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    background: #060912;
+    min-height: 700px;
+    position: relative;
+    overflow: hidden;
+    color: #e2dff5;
+  }
+
+  .orb1 {
+    position: absolute; width: 520px; height: 520px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(120,80,255,0.18) 0%, transparent 70%);
+    top: -120px; left: -80px; pointer-events: none;
+  }
+  .orb2 {
+    position: absolute; width: 400px; height: 400px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,220,180,0.12) 0%, transparent 70%);
+    top: 60px; right: -60px; pointer-events: none;
+  }
+  .orb3 {
+    position: absolute; width: 300px; height: 300px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,100,180,0.09) 0%, transparent 70%);
+    bottom: 80px; left: 40%; pointer-events: none;
+  }
+
+  .noise {
+    position: absolute; inset: 0; pointer-events: none; opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px;
+  }
+
+  nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.1rem 2rem;
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    position: relative; z-index: 10;
+  }
+
+  .nav-brand {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; color: #a78bfa; letter-spacing: 0.05em;
+  }
+  .nav-brand span { color: #34d399; }
+
+  .nav-pill {
+    display: flex; gap: 4px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 999px; padding: 4px 6px;
+  }
+  .nav-pill a {
+    font-size: 11px; font-family: 'JetBrains Mono', monospace;
+    color: rgba(226,223,245,0.5); text-decoration: none;
+    padding: 5px 14px; border-radius: 999px; letter-spacing: 0.06em;
+    transition: all 0.2s;
+  }
+  .nav-pill a.active, .nav-pill a:hover {
+    color: #e2dff5;
+    background: rgba(167,139,250,0.2);
+  }
+
+  .hero-area {
+    padding: 3rem 2rem 2rem; position: relative; z-index: 5;
+    display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: start;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    color: #34d399; letter-spacing: 0.15em; text-transform: uppercase;
+    background: rgba(52,211,153,0.08);
+    border: 1px solid rgba(52,211,153,0.2);
+    padding: 5px 12px; border-radius: 999px; margin-bottom: 1.25rem;
+  }
+  .pulse { width: 6px; height: 6px; border-radius: 50%; background: #34d399; animation: blink 1.8s ease-in-out infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+  h1 {
+    font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 800;
+    line-height: 1.0; letter-spacing: -0.03em; margin-bottom: 1rem;
+  }
+  h1 .name-line { display: block; color: #e2dff5; }
+  h1 .accent { color: transparent; -webkit-text-stroke: 1.5px rgba(167,139,250,0.7); }
+
+  .hero-desc {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: rgba(226,223,245,0.45); line-height: 1.9; max-width: 440px;
+    margin-bottom: 2rem;
+  }
+  .hero-desc .hi { color: #a78bfa; }
+
+  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .btn-glow {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
+    padding: 10px 22px; border-radius: 8px; border: none;
+    background: linear-gradient(135deg, #7c3aed, #a78bfa);
+    color: #fff; font-weight: 500;
+    box-shadow: 0 0 20px rgba(124,58,237,0.35), inset 0 1px 0 rgba(255,255,255,0.15);
+    transition: box-shadow 0.2s;
+  }
+  .btn-glow:hover { box-shadow: 0 0 30px rgba(124,58,237,0.55), inset 0 1px 0 rgba(255,255,255,0.2); }
+
+  .btn-outline {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
+    padding: 10px 22px; border-radius: 8px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(226,223,245,0.7);
+    backdrop-filter: blur(10px);
+  }
+
+  .terminal-card {
+    background: rgba(10,8,25,0.6);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    overflow: hidden; min-width: 260px; max-width: 300px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+
+  .term-bar {
+    display: flex; align-items: center; gap: 6px;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot.r { background: #ff5f57; }
+  .dot.y { background: #febc2e; }
+  .dot.g { background: #28c840; }
+  .term-title { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: rgba(226,223,245,0.3); margin-left: auto; }
+
+  .term-body { padding: 14px 16px; font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 2; }
+  .line-prompt { color: #a78bfa; }
+  .line-prompt span { color: #34d399; }
+  .line-cmd { color: #e2dff5; margin-left: 4px; }
+  .line-out { color: rgba(226,223,245,0.45); padding-left: 14px; }
+  .line-out.green { color: #34d399; padding-left: 14px; }
+  .line-out.purple { color: #c4b5fd; padding-left: 14px; }
+  .cursor { display: inline-block; width: 7px; height: 13px; background: #a78bfa; animation: blink 1s step-end infinite; vertical-align: middle; }
+
+  .skills-row {
+    padding: 1.5rem 2rem; position: relative; z-index: 5;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+  }
+  .skills-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(226,223,245,0.25); letter-spacing: 0.15em; margin-right: 6px; }
+
+  .chip {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    padding: 5px 12px; border-radius: 6px; letter-spacing: 0.05em;
+    backdrop-filter: blur(10px);
+  }
+  .chip.v1 { background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.25); color: #c4b5fd; }
+  .chip.v2 { background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.2); color: #6ee7b7; }
+  .chip.v3 { background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.18); color: #fbbf24; }
+
+  .projects-area {
+    padding: 1.5rem 2rem 2rem; position: relative; z-index: 5;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    color: rgba(226,223,245,0.25); letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .section-label span { color: #a78bfa; }
+
+  .proj-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; }
+
+  .proj-card {
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px; padding: 1.1rem;
+    transition: border-color 0.2s, background 0.2s;
+    cursor: pointer;
+  }
+  .proj-card:hover { border-color: rgba(167,139,250,0.35); background: rgba(167,139,250,0.05); }
+
+  .proj-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+  .proj-icon {
+    width: 34px; height: 34px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px;
+  }
+  .proj-icon.a { background: rgba(167,139,250,0.15); }
+  .proj-icon.b { background: rgba(52,211,153,0.12); }
+  .proj-icon.c { background: rgba(251,191,36,0.1); }
+
+  .proj-arrow { font-family: 'JetBrains Mono'; font-size: 14px; color: rgba(226,223,245,0.2); }
+  .proj-card:hover .proj-arrow { color: #a78bfa; }
+
+  .proj-name { font-size: 13px; font-weight: 700; color: #e2dff5; margin-bottom: 4px; }
+  .proj-tech { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(226,223,245,0.35); }
+</style>
+
+<div class="wrap">
+  <div class="orb1"></div>
+  <div class="orb2"></div>
+  <div class="orb3"></div>
+  <div class="noise"></div>
+
+  <nav>
+    <div class="nav-brand">~/<span>paul-njogu</span></div>
+    <div class="nav-pill">
+      <a href="#" class="active">home</a>
+      <a href="#">work</a>
+      <a href="#">about</a>
+      <a href="#">contact</a>
+    </div>
+  </nav>
+
+  <div class="hero-area">
+    <div>
+      <div class="hero-badge"><div class="pulse"></div>Open to work — Nairobi / Remote</div>
+      <h1>
+        <span class="name-line">Paul</span>
+        <span class="accent">Njogu.</span>
+      </h1>
+      <p class="hero-desc">
+        <span class="hi">// Flutter &amp; Python dev</span><br>
+        Building mobile apps, REST APIs &amp; cloud infra<br>
+        that actually ship. From Eldoret, Kenya.
+      </p>
+      <div class="btn-row">
+        <button class="btn-glow">./view_projects</button>
+        <button class="btn-outline">cat resume.pdf</button>
+      </div>
+    </div>
+
+    <div class="terminal-card">
+      <div class="term-bar">
+        <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+        <div class="term-title">paul@dev ~ bash</div>
+      </div>
+      <div class="term-body">
+        <div><span class="line-prompt">paul<span>@portfolio</span> ~$</span><span class="line-cmd">whoami</span></div>
+        <div class="line-out green">Flutter · Python · Django</div>
+        <div class="line-out green">Docker · Firebase · AWS</div>
+        <div style="height:6px"></div>
+        <div><span class="line-prompt">paul<span>@portfolio</span> ~$</span><span class="line-cmd">ls projects/</span></div>
+        <div class="line-out purple">hikers-afrique/</div>
+        <div class="line-out purple">reflections-app/</div>
+        <div class="line-out purple">task-manager/</div>
+        <div style="height:6px"></div>
+        <div><span class="line-prompt">paul<span>@portfolio</span> ~$</span><span class="line-cmd">status</span></div>
+        <div class="line-out green">available for hire ✓</div>
+        <div><span class="line-prompt">paul<span>@portfolio</span> ~$</span><span class="cursor"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="skills-row">
+    <span class="skills-label">// stack</span>
+    <span class="chip v1">Flutter</span>
+    <span class="chip v1">Dart</span>
+    <span class="chip v1">Riverpod</span>
+    <span class="chip v2">Python</span>
+    <span class="chip v2">Django</span>
+    <span class="chip v2">PostgreSQL</span>
+    <span class="chip v3">Docker</span>
+    <span class="chip v3">Kubernetes</span>
+    <span class="chip v3">AWS</span>
+    <span class="chip v3">CI/CD</span>
+  </div>
+
+  <div class="projects-area">
+    <div class="section-label"><span>//</span> featured_projects</div>
+    <div class="proj-grid">
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-icon a">🏔</div>
+          <div class="proj-arrow">↗</div>
+        </div>
+        <div class="proj-name">Hikers Afrique</div>
+        <div class="proj-tech">Flutter · Firebase · Providers</div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-icon b">🎙</div>
+          <div class="proj-arrow">↗</div>
+        </div>
+        <div class="proj-name">Reflections on Faith</div>
+        <div class="proj-tech">Flutter · Firebase · CI/CD</div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-icon c">✅</div>
+          <div class="proj-arrow">↗</div>
+        </div>
+        <div class="proj-name">Task Manager</div>
+        <div class="proj-tech">Dart · OOP · DSA</div>
+      </div>
+    </div>
+  </div>
+
+</div>

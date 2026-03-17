@@ -1,0 +1,32 @@
+# Virtual Environment
+venv/
+.env/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django stuff
+*.log
+*.pot
+*.pyc
+db.sqlite3
+media/
+
+# Environment variables
+.env
+
+# VS Code
+.vscode/
+
+# Mac/Linux system files
+.DS_Store
+
+# Static files (optional if you collectstatic)
+staticfiles/
+
+# Migrations (optional – usually you KEEP these)
+# */migrations/*
+# !*/migrations/__init__.py

@@ -1,0 +1,355 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap');
+  
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .port {
+    font-family: 'Syne', sans-serif;
+    background: #0a0a0f;
+    color: #e8e4d8;
+    min-height: 600px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(99,255,186,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(99,255,186,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 2rem;
+    border-bottom: 1px solid rgba(99,255,186,0.15);
+    position: relative;
+    z-index: 2;
+  }
+
+  .logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: #63ffba;
+    letter-spacing: 0.1em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    color: rgba(232,228,216,0.6);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: #63ffba; }
+
+  .hero {
+    padding: 3.5rem 2rem 2.5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .tag-line {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: #63ffba;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tag-line::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: #63ffba;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: #e8e4d8;
+    margin-bottom: 0.75rem;
+  }
+
+  h1 span {
+    color: #63ffba;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    color: rgba(232,228,216,0.5);
+    font-family: 'Space Mono', monospace;
+    margin-bottom: 2rem;
+    max-width: 480px;
+    line-height: 1.7;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: #63ffba;
+    color: #0a0a0f;
+    border: none;
+    padding: 10px 22px;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    font-weight: 700;
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: #e8e4d8;
+    border: 1px solid rgba(232,228,216,0.25);
+    padding: 10px 22px;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+
+  .stats-row {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(232,228,216,0.08);
+  }
+
+  .stat-item {}
+  .stat-num {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #e8e4d8;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: rgba(232,228,216,0.4);
+    font-family: 'Space Mono', monospace;
+    margin-top: 4px;
+    letter-spacing: 0.08em;
+  }
+
+  .skills-section {
+    padding: 2rem;
+    position: relative;
+    z-index: 2;
+    border-top: 1px solid rgba(99,255,186,0.1);
+    background: rgba(99,255,186,0.02);
+  }
+
+  .section-header {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(232,228,216,0.35);
+    font-family: 'Space Mono', monospace;
+    margin-bottom: 1.25rem;
+  }
+
+  .skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .skill-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    padding: 5px 12px;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  .skill-tag.mobile { background: rgba(99,255,186,0.1); color: #63ffba; border: 1px solid rgba(99,255,186,0.2); }
+  .skill-tag.backend { background: rgba(55,138,221,0.1); color: #85b7eb; border: 1px solid rgba(55,138,221,0.2); }
+  .skill-tag.infra { background: rgba(186,117,23,0.1); color: #fac775; border: 1px solid rgba(186,117,23,0.2); }
+
+  .projects-section {
+    padding: 2rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 1.25rem;
+  }
+
+  .project-card {
+    border: 1px solid rgba(232,228,216,0.08);
+    border-radius: 4px;
+    padding: 1.25rem;
+    background: rgba(255,255,255,0.02);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: #63ffba;
+    opacity: 0.6;
+  }
+
+  .project-card:nth-child(2)::before { background: #85b7eb; }
+  .project-card:nth-child(3)::before { background: #fac775; }
+
+  .project-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: rgba(232,228,216,0.25);
+    margin-bottom: 8px;
+  }
+
+  .project-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #e8e4d8;
+    margin-bottom: 6px;
+  }
+
+  .project-desc {
+    font-size: 12px;
+    color: rgba(232,228,216,0.45);
+    line-height: 1.6;
+  }
+
+  .status-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #63ffba;
+    margin-right: 6px;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .available-badge {
+    display: inline-flex;
+    align-items: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: #63ffba;
+    letter-spacing: 0.1em;
+    margin-left: 1rem;
+  }
+</style>
+
+<div class="port">
+  <div class="grid-bg"></div>
+  
+  <nav>
+    <div class="logo">pn.dev <span class="available-badge"><span class="status-dot"></span>Available</span></div>
+    <ul class="nav-links">
+      <li><a href="#">Work</a></li>
+      <li><a href="#">Skills</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <div class="tag-line">Flutter & Python Developer</div>
+    <h1>Paul<br/><span>Njogu.</span></h1>
+    <p class="subtitle">Building mobile apps & APIs that work — from Eldoret, KE. Flutter, Django, Firebase, Docker & cloud infrastructure.</p>
+    <div class="cta-row">
+      <button class="btn-primary">View Projects</button>
+      <button class="btn-ghost">Download CV</button>
+    </div>
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-num">5+</div>
+        <div class="stat-label">Projects Shipped</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2+</div>
+        <div class="stat-label">Companies</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3+</div>
+        <div class="stat-label">Years Building</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="skills-section">
+    <div class="section-header">// Tech Stack</div>
+    <div class="skills-grid">
+      <span class="skill-tag mobile">Flutter</span>
+      <span class="skill-tag mobile">Dart</span>
+      <span class="skill-tag mobile">Firebase</span>
+      <span class="skill-tag mobile">Riverpod</span>
+      <span class="skill-tag backend">Python</span>
+      <span class="skill-tag backend">Django</span>
+      <span class="skill-tag backend">REST APIs</span>
+      <span class="skill-tag backend">PostgreSQL</span>
+      <span class="skill-tag infra">Docker</span>
+      <span class="skill-tag infra">AWS</span>
+      <span class="skill-tag infra">Kubernetes</span>
+      <span class="skill-tag infra">CI/CD</span>
+    </div>
+  </div>
+
+  <div class="projects-section">
+    <div class="section-header">// Featured Work</div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-num">01 — Mobile</div>
+        <div class="project-name">Hikers Afrique</div>
+        <div class="project-desc">Cross-platform app for hiking adventures. Firebase realtime sync, auth & cloud storage.</div>
+      </div>
+      <div class="project-card">
+        <div class="project-num">02 — Mobile</div>
+        <div class="project-name">Reflections on Faith</div>
+        <div class="project-desc">Audio recording & in-chat Q&A forum. Flutter + Firebase with CI/CD deployment.</div>
+      </div>
+      <div class="project-card">
+        <div class="project-num">03 — Backend</div>
+        <div class="project-name">Task Manager</div>
+        <div class="project-desc">Pure Dart task system. OOP, data structures & algorithms under the hood.</div>
+      </div>
+    </div>
+  </div>
+</div>
