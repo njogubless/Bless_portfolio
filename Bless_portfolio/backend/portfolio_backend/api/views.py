@@ -1,11 +1,9 @@
-from rest_framework import viewsets, serializers
-from .models import Project, Experience
+from rest_framework import generics
+from .models import Project
+from .serializers import ProjectSerializer
 
-class ProjectSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Project
-        fields = '__all__'
-
-class ProjectViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Project.objects.all().order_by('order')
+# This one view handles GET /api/projects/
+# It automatically returns all projects as a JSON list
+class ProjectListView(generics.ListAPIView):
+    queryset         = Project.objects.all()
     serializer_class = ProjectSerializer
