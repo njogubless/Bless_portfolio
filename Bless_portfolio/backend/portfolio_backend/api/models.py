@@ -14,4 +14,18 @@ class Project(models.Model):
         ordering = ['order']   # always return projects sorted by order
 
     def __str__(self):
-        return self.name       # shows project name in the admin panel
+        return self.name    
+        
+class Message(models.Model):
+    name       = models.CharField(max_length=100)
+    email      = models.EmailField()
+    subject    = models.CharField(max_length=200)
+    body       = models.TextField()
+    sent_at    = models.DateTimeField(auto_now_add=True)
+    is_read    = models.BooleanField(default=False)   # track unread messages
+
+    class Meta:
+        ordering = ['-sent_at']   # newest first
+
+    def __str__(self):
+        return f"{self.name} — {self.subject}"
