@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Skills from './components/Skills'
 import Projects from './components/Projects'
+import Contact    from './components/Contact'
 
 function App() {
   // 1. Create the state to hold the selected skill
@@ -18,6 +19,7 @@ function App() {
       <Skills activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
       {/* 3. Pass the filter value to Projects */}
       <Projects activeFilter={activeFilter} />
+      <Contact />
     </div>
   )
 }
