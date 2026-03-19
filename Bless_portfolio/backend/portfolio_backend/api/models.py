@@ -7,11 +7,11 @@ class Project(models.Model):
     github_url  = models.URLField(blank=True)
     icon        = models.CharField(max_length=10, default='💻')
     color       = models.CharField(max_length=20, default='purple')
-    order       = models.IntegerField(default=0)   # controls display order
+    order       = models.IntegerField(default=0)  
     created_at  = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['order']   # always return projects sorted by order
+        ordering = ['order'] 
 
     def __str__(self):
         return self.name    
@@ -22,10 +22,9 @@ class Message(models.Model):
     subject    = models.CharField(max_length=200)
     body       = models.TextField()
     sent_at    = models.DateTimeField(auto_now_add=True)
-    is_read    = models.BooleanField(default=False)   # track unread messages
-
+    is_read    = models.BooleanField(default=False)  
     class Meta:
-        ordering = ['-sent_at']   # newest first
+        ordering = ['-sent_at']  
 
     def __str__(self):
         return f"{self.name} — {self.subject}"
