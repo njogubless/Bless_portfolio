@@ -1,25 +1,22 @@
-import React, { useState } from 'react'
+import { Routes, Route } from 'react-router-dom'
 import Background from './components/Background'
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import Skills from './components/Skills'
-import Projects from './components/Projects'
-import Contact    from './components/Contact'
+import Navbar     from './components/Navbar'
+import Home       from './pages/Home'
+import About      from './pages/About'
+import Work       from './pages/Work'
+import Contact    from './pages/Contact'
 
 function App() {
-  // 1. Create the state to hold the selected skill
-  const [activeFilter, setActiveFilter] = useState(null);
-
   return (
-    <div style={{ position: 'relative', minHeight: '100vh', scrollBehavior: 'smooth' }}>
+    <div style={{ position: 'relative', minHeight: '100vh' }}>
       <Background />
       <Navbar />
-      <Hero />
-      {/* 2. Pass the state and the setter function to Skills */}
-      <Skills activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
-      {/* 3. Pass the filter value to Projects */}
-      <Projects activeFilter={activeFilter} />
-      <Contact />
+      <Routes>
+        <Route path="/"        element={<Home />}    />
+        <Route path="/about"   element={<About />}   />
+        <Route path="/work"    element={<Work />}    />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
     </div>
   )
 }
