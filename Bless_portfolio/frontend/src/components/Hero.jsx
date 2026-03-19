@@ -7,7 +7,7 @@ function Hero() {
             display: 'flex', justifyContent: 'space-between',
             alignItems: 'flex-start', gap: '2rem',
             padding: '3.5rem 2rem 2.5rem',
-            flexWrap: 'wrap',   // stacks on small screens
+            flexWrap: 'wrap',   
         }}>
 
             {/* Left — text content */}
