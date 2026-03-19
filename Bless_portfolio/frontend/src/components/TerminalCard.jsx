@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
 
-// This component shows the animated terminal in the top-right of the hero
+
 
 function TerminalCard() {
   const [visible, setVisible] = useState(0)
 
-  // useEffect runs code AFTER the component appears on screen
-  // Here we use it to reveal terminal lines one by one, like a real terminal
+
   useEffect(() => {
     const timer = setInterval(() => {
       setVisible(prev => {
@@ -14,18 +13,18 @@ function TerminalCard() {
         return prev + 1
       })
     }, 350)
-    return () => clearInterval(timer)   // cleanup when component unmounts
+    return () => clearInterval(timer)
   }, [])
 
   const lines = [
-    { type: 'cmd',  text: 'whoami' },
-    { type: 'out',  text: 'Flutter · Python · Django',  color: '#34d399' },
-    { type: 'out',  text: 'Docker · Firebase · AWS',    color: '#34d399' },
+    { type: 'cmd', text: 'whoami' },
+    { type: 'out', text: 'Flutter · Python · Django', color: '#34d399' },
+    { type: 'out', text: 'Docker · Firebase · AWS', color: '#34d399' },
     { type: 'gap' },
-    { type: 'cmd',  text: 'ls projects/' },
-    { type: 'out',  text: 'hikers-afrique/',   color: '#c4b5fd' },
-    { type: 'out',  text: 'reflections-app/', color: '#c4b5fd' },
-    { type: 'out',  text: 'task-manager/',    color: '#c4b5fd' },
+    { type: 'cmd', text: 'ls projects/' },
+    { type: 'out', text: 'hikers-afrique/', color: '#c4b5fd' },
+    { type: 'out', text: 'reflections-app/', color: '#c4b5fd' },
+    { type: 'out', text: 'task-manager/', color: '#c4b5fd' },
   ]
 
   return (
@@ -46,7 +45,7 @@ function TerminalCard() {
         background: 'rgba(255,255,255,0.04)',
         borderBottom: '1px solid rgba(255,255,255,0.07)',
       }}>
-        {['#ff5f57','#febc2e','#28c840'].map(c => (
+        {['#ff5f57', '#febc2e', '#28c840'].map(c => (
           <div key={c} style={{ width: 10, height: 10, borderRadius: '50%', background: c }} />
         ))}
         <span style={{ marginLeft: 'auto', fontFamily: 'JetBrains Mono', fontSize: '11px', color: 'rgba(226,223,245,0.3)' }}>
