@@ -1,6 +1,5 @@
 import { useState } from 'react'
 
-// ─── DATA ────────────────────────────────────────────────────────────────────
 
 const experience = [
   {
@@ -136,7 +135,7 @@ const projectGroups = [
   },
 ]
 
-// ─── COLOUR MAP ───────────────────────────────────────────────────────────────
+
 
 const colors = {
   purple: {
@@ -159,7 +158,7 @@ const colors = {
   },
 }
 
-// ─── REUSABLE COMPONENTS ──────────────────────────────────────────────────────
+
 
 function GlassCard({ children, style = {} }) {
   return (
@@ -206,7 +205,7 @@ function StatusBadge({ status }) {
   )
 }
 
-// ─── EXPERIENCE CARD ──────────────────────────────────────────────────────────
+
 
 function ExperienceCard({ job }) {
   const [expanded, setExpanded] = useState(false)
@@ -280,7 +279,7 @@ function ExperienceCard({ job }) {
   )
 }
 
-// ─── PROJECT CARD ─────────────────────────────────────────────────────────────
+
 
 function ProjectCard({ project, color }) {
   const [hovered, setHovered] = useState(false)
@@ -368,7 +367,7 @@ function ProjectCard({ project, color }) {
   )
 }
 
-// ─── MAIN WORK PAGE ───────────────────────────────────────────────────────────
+
 
 function Work() {
   const [activeSection, setActiveSection] = useState('experience')
