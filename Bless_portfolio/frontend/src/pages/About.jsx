@@ -47,7 +47,7 @@ const values = [
   { label: 'Never stop',   sub: 'learning'           },
 ]
 
-// Reusable glass card wrapper
+
 function GlassCard({ children, style = {} }) {
   return (
     <div style={{
