@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-// ─── icon background colours (same as before) ───────────────────────────────
+
 const iconBg = {
     purple: 'rgba(167,139,250,0.15)',
     green: 'rgba(52,211,153,0.12)',
@@ -9,7 +9,7 @@ const iconBg = {
     indigo: 'rgba(99,102,241,0.12)',
 }
 
-// ─── single project card (unchanged from your version) ──────────────────────
+
 function ProjectCard({ project }) {
     const [hovered, setHovered] = useState(false)
 
@@ -67,8 +67,6 @@ function ProjectCard({ project }) {
     )
 }
 
-// ─── loading skeleton — shown while API is fetching ──────────────────────────
-// This gives users visual feedback instead of a blank screen
 function SkeletonCard() {
     return (
         <div style={{
@@ -97,7 +95,6 @@ function SkeletonCard() {
     )
 }
 
-// ─── error state ─────────────────────────────────────────────────────────────
 function ErrorState({ onRetry }) {
     return (
         <div style={{
@@ -124,7 +121,7 @@ function ErrorState({ onRetry }) {
     )
 }
 
-// ─── main Projects component ──────────────────────────────────────────────────
+
 const API_URL = 'http://127.0.0.1:8082/api/projects/'
 
 function Projects({ activeFilter }) {
@@ -132,14 +129,14 @@ function Projects({ activeFilter }) {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
 
-    // fetchProjects is defined as its own function so the retry button can call it too
+
     const fetchProjects = () => {
         setLoading(true)
         setError(false)
 
         fetch(API_URL)
             .then(res => {
-                // If Django returns a non-200 status, treat it as an error
+             
                 if (!res.ok) throw new Error(`HTTP ${res.status}`)
                 return res.json()
             })
@@ -154,12 +151,12 @@ function Projects({ activeFilter }) {
             })
     }
 
-    // Run fetchProjects once when the component first mounts
+ 
     useEffect(() => {
         fetchProjects()
     }, [])
 
-    // Filter logic — same as your original but now works on live data
+  
     const filteredProjects = activeFilter
         ? projects.filter(p => p.tech.toLowerCase().includes(activeFilter.toLowerCase()))
         : projects
