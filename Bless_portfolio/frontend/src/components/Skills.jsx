@@ -1,5 +1,4 @@
-// Our skill data lives here as an array of objects
-// This is a pattern you'll use everywhere in React — data separate from UI
+
 const skills = [
     { label: 'Flutter', variant: 'purple' },
     { label: 'Dart', variant: 'purple' },
@@ -19,7 +18,7 @@ const skills = [
 
 ]
 
-// Each variant maps to a colour scheme
+
 const variants = {
     purple: { bg: 'rgba(167,139,250,0.1)', border: 'rgba(167,139,250,0.25)', color: '#c4b5fd' },
     green: { bg: 'rgba(52,211,153,0.08)', border: 'rgba(52,211,153,0.2)', color: '#6ee7b7' },
@@ -57,7 +56,7 @@ function Skills({ activeFilter, setActiveFilter }) {
                             padding: '5px 12px', borderRadius: '6px', cursor: 'pointer',
                             background: isSelected ? style.color : style.bg,
                             border: `1px solid ${style.border}`,
-                            color: isSelected ? '#000' : style.color, // Text turns black when background is bright
+                            color: isSelected ? '#000' : style.color,
                             transition: 'all 0.2s ease',
                             backdropFilter: 'blur(10px)',
                         }}
