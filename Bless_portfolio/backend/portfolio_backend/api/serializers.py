@@ -1,10 +1,9 @@
-#from email.message import Message
+
 
 from rest_framework import serializers
 from .models import Project, Message
 
-# A serializer converts a Python object (your Project model)
-# into JSON that React can read — and vice versa
+
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model  = Project
