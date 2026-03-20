@@ -15,20 +15,28 @@ jobs:
     name: Test Django
     runs-on: ubuntu-latest
 
+    # 🔹 Centralized environment variables
+    env:
+      POSTGRES_DB: test_portfolio
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_portfolio
+      DEBUG: "False"
+
     services:
       postgres:
         image: postgres:15
         env:
-          POSTGRES_DB: test_portfolio
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: ${{ env.POSTGRES_DB }}
+          POSTGRES_USER: ${{ env.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
         ports:
           - 5432:5432
         options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
 
     steps:
       - name: Checkout code
@@ -47,41 +55,40 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Wait for Postgres
+        run: |
+          for i in {1..10}; do
+            pg_isready -h localhost -p 5432 && break
+            echo "Waiting for postgres..."
+            sleep 2
+          done
+
       - name: Django system check
         working-directory: backend/portfolio_backend
         run: python manage.py check
         env:
           SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-          DEBUG: "False"
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_portfolio
 
       - name: Run migrations
         working-directory: backend/portfolio_backend
         run: python manage.py migrate
         env:
           SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-          DEBUG: "False"
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_portfolio
 
       - name: Run tests
         working-directory: backend/portfolio_backend
         run: python manage.py test api
         env:
           SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-          DEBUG: "False"
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_portfolio
 
   deploy:
-    name: Deploy to Render
+    name: Deploy to :contentReference[oaicite:0]{index=0}
     runs-on: ubuntu-latest
     needs: test
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Trigger Render deployment
+      - name: Trigger deployment
         run: |
           curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}" \
             -H "Content-Type: application/json"
