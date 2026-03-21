@@ -125,7 +125,12 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
     'http://127.0.0.1:5173',
-    'https://bless-portfolio-1.onrender.com',
+    'https://bless-portfolio-nine.vercel.app',
+]
+
+# This covers ALL current and future Vercel preview URLs automatically
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://.*\.vercel\.app$",
 ]
 
 from datetime import timedelta
