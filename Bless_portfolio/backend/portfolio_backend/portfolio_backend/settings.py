@@ -22,7 +22,7 @@ SECRET_KEY = 'django-insecure-1xe33756fy-xwea79yutf0-aa_2eu##u-=plpeia44ed1u7(t0
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', ',onrender.com',]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.onrender.com',]
 
 
 
@@ -125,8 +125,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
     'http://127.0.0.1:5173',
-     'https://paulnjogu.com',
-    'https://www.paulnjogu.com',
+    'https://bless-portfolio-1.onrender.com',
 ]
 
 from datetime import timedelta
