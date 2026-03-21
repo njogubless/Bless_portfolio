@@ -122,7 +122,7 @@ function ErrorState({ onRetry }) {
 }
 
 
-const API_URL = 'http://127.0.0.1:8082/api/projects/'
+const API_URL = 'https://bless-portfolio-1.onrender.com/api/projects/'
 
 function Projects({ activeFilter }) {
     const [projects, setProjects] = useState([])

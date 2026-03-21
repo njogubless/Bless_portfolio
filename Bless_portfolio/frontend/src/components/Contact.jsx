@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const API_URL = 'http://127.0.0.1:8082/api/contact/'
+const API_URL = 'https://bless-portfolio-1.onrender.com/api/contact/'
 
 const initialForm = {
   name:    '',
