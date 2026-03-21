@@ -74,7 +74,7 @@ function Hero() {
                     </a>
 
                     {/* 2. Resume Button - Updated to point to your PDF file */}
-                    <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+                    <a href="https://drive.google.com/file/d/1Nx7bRClHNlHRQTk2tFBRgLTlKUXyGLWV/view?usp=sharing" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
                         <button style={{
                             fontFamily: 'JetBrains Mono, monospace', fontSize: '11px',
                             letterSpacing: '0.1em', textTransform: 'uppercase',
