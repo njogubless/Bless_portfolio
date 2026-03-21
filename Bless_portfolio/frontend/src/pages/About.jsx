@@ -36,7 +36,7 @@ const interests = [
   { label: 'Hiking',            icon: '🏔'  },
   { label: 'Teaching & Mentoring', icon: '🎯' },
   { label: 'System Design',     icon: '🏗'  },
-  { label: 'Music',             icon: '🎵'  },
+  { label: 'Driving',             icon: '🎵'  },
   { label: 'Community Building',icon: '🌍'  },
 ]
 
@@ -44,7 +44,7 @@ const values = [
   { label: 'Ship fast,',   sub: 'iterate faster'     },
   { label: 'Write code',   sub: 'others can read'    },
   { label: 'Build things', sub: 'that actually work' },
-  { label: 'Never stop',   sub: 'learning'           },
+  { label: 'Iterate',   sub: 'learning'           },
 ]
 
 
