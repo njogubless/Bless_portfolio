@@ -112,9 +112,10 @@ function About() {
           color: 'rgba(226,223,245,0.45)', lineHeight: 1.9, maxWidth: '520px',
         }}>
           <span style={{ color: '#a78bfa' }}>// </span>
-          Software developer from Eldoret, Kenya. I build mobile apps and backend
-          systems that ship. Passionate about clean code, great UX, and
-          growing the tech community around me.
+          Full-stack engineer based in Nairobi. I build mobile apps,
+          design backend systems, and own the infrastructure they run on — end-to-end,
+          from code to cloud. I care about reliability, performance, and software that scales.
+          #GoodCode#Build#Learn#Iterate
         </p>
       </div>
 
@@ -302,10 +303,10 @@ function About() {
             <div style={{ fontFamily: 'JetBrains Mono', fontSize: '11px', lineHeight: 2.2, color: 'rgba(226,223,245,0.6)' }}>
               <div><span style={{ color: '#a78bfa' }}>const</span> <span style={{ color: '#34d399' }}>paul</span> = {'{'}</div>
               <div style={{ paddingLeft: '1.5rem' }}><span style={{ color: '#c4b5fd' }}>role</span>: <span style={{ color: '#fbbf24' }}>"Flutter & Python Developer"</span>,</div>
-              <div style={{ paddingLeft: '1.5rem' }}><span style={{ color: '#c4b5fd' }}>location</span>: <span style={{ color: '#fbbf24' }}>"Eldoret, Kenya 🇰🇪"</span>,</div>
+              <div style={{ paddingLeft: '1.5rem' }}><span style={{ color: '#c4b5fd' }}>location</span>: <span style={{ color: '#fbbf24' }}>"Nairobi, Kenya 🇰🇪"</span>,</div>
               <div style={{ paddingLeft: '1.5rem' }}><span style={{ color: '#c4b5fd' }}>available</span>: <span style={{ color: '#34d399' }}>true</span>,</div>
-              <div style={{ paddingLeft: '1.5rem' }}><span style={{ color: '#c4b5fd' }}>languages</span>: [<span style={{ color: '#fbbf24' }}>"Dart"</span>, <span style={{ color: '#fbbf24' }}>"Python"</span>, <span style={{ color: '#fbbf24' }}>"JavaScript"</span>],</div>
-              <div style={{ paddingLeft: '1.5rem' }}><span style={{ color: '#c4b5fd' }}>currentlyLearning</span>: <span style={{ color: '#fbbf24' }}>"React & Django"</span>,</div>
+              <div style={{ paddingLeft: '1.5rem' }}><span style={{ color: '#c4b5fd' }}>languages</span>: [<span style={{ color: '#fbbf24' }}>"Dart"</span>, <span style={{ color: '#fbbf24' }}>"Flutter"</span>, <span style={{ color: '#fbbf24' }}>"Python"</span>, <span style={{ color: '#fbbf24' }}>"JavaScript"</span>],</div>
+              <div style={{ paddingLeft: '1.5rem' }}><span style={{ color: '#c4b5fd' }}>currentlyLearning</span>: <span style={{ color: '#fbbf24' }}>"React"</span>,</div>
               <div style={{ paddingLeft: '1.5rem' }}><span style={{ color: '#c4b5fd' }}>funFact</span>: <span style={{ color: '#fbbf24' }}>"I debug better with coffee ☕"</span>,</div>
               <div>{'}'}</div>
             </div>
