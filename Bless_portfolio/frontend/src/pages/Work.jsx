@@ -1,5 +1,4 @@
-import { useState } from 'react'
-
+import { useState, useEffect } from 'react'
 
 const experience = [
   {
@@ -46,7 +45,7 @@ const projectGroups = [
   {
     id: 'mobile',
     label: 'Mobile',
-    icon: '📱',
+    icon: '[mob]',
     color: 'purple',
     description: 'Cross-platform mobile applications built with Flutter and Dart',
     projects: [
@@ -82,7 +81,7 @@ const projectGroups = [
   {
     id: 'backend',
     label: 'Backend',
-    icon: '⚙️',
+    icon: '[api]',
     color: 'green',
     description: 'APIs, databases and server-side systems',
     projects: [
@@ -96,10 +95,10 @@ const projectGroups = [
         status: 'shipped',
       },
       {
-        name: ' Logistics Platform Backend',
+        name: 'Logistics Platform Backend',
         period: '2023 — 2024',
-        desc: 'GiantBox is a logistics backend API that manages the complete delivery pipeline: partners register and manage shipments, customers track packages in real time, payments are processed securely, and deliveries are rated on completion — all behind a structured, app-per-feature Django architecture.',
-        stack: ['Python', 'Django', 'PostgreSQL', 'JWT',],
+        desc: 'GiantBox is a logistics backend API that manages the complete delivery pipeline: partners register and manage shipments, customers track packages in real time, payments are processed securely, and deliveries are rated on completion.',
+        stack: ['Python', 'Django', 'PostgreSQL', 'JWT'],
         github: 'https://github.com/njogubless/giantbox_api',
         playstore: null,
         status: 'private',
@@ -109,33 +108,31 @@ const projectGroups = [
   {
     id: 'infrastructure',
     label: 'Infrastructure',
-    icon: '☁️',
+    icon: '[infra]',
     color: 'amber',
     description: 'DevOps, cloud deployments and CI/CD pipelines',
     projects: [
       {
-        name: ' Backend Report System ',
+        name: 'Backend Report System',
         period: '2023 — 2024',
-        desc: 'A full-stack deployment and infrastructure automation project built with Terraform, Docker, Kubernetes (Minikube), Ansible, and CI/CD via Travis CI. Covers container orchestration, configuration management, cloud provisioning, reverse proxy setup with Nginx, and system monitoring with Prometheus — all wired together with automated deploy pipelines.',
+        desc: 'A full-stack deployment and infrastructure automation project built with Terraform, Docker, Kubernetes (Minikube), Ansible, and CI/CD via Travis CI. Covers container orchestration, configuration management, cloud provisioning, reverse proxy setup with Nginx, and system monitoring with Prometheus.',
         stack: ['Docker', 'Docker Compose', 'Nginx', 'Digital Ocean', 'PostgreSQL'],
         github: 'https://github.com/njogubless/Ndovu-Cloud-Tasks-',
         playstore: null,
-        status: 'Public',
+        status: 'shipped',
       },
       {
         name: 'Open Source Music Platform',
-        period: '2025(March) — 2025(August',
-        desc: 'Open-source Django backend powering a music sharing platform. Built with DRF, it exposes a clean REST API for track uploads, artist profiles, user authentication via JWT, and content discovery — designed from the ground up to be contributor-friendly and production-extensible.',
+        period: '2025 — present',
+        desc: 'Open-source Django backend powering a music sharing platform. Built with DRF, it exposes a clean REST API for track uploads, artist profiles, user authentication via JWT, and content discovery.',
         stack: ['Django', 'DRF', 'Docker', 'Digital Ocean'],
         github: 'https://github.com/njogubless/OSS_music_platform',
         playstore: null,
-        status: 'Public',
+        status: 'shipped',
       },
     ],
   },
 ]
-
-
 
 const colors = {
   purple: {
@@ -158,8 +155,6 @@ const colors = {
   },
 }
 
-
-
 function GlassCard({ children, style = {} }) {
   return (
     <div style={{
@@ -181,7 +176,7 @@ function Chip({ label, color = 'purple' }) {
     <span style={{
       fontFamily: 'JetBrains Mono', fontSize: '10px',
       padding: '3px 10px', borderRadius: '6px',
-      background: c.bg, border: `1px solid ${c.border}`,
+      background: c.bg, border: '1px solid ' + c.border,
       color: c.text,
     }}>
       {label}
@@ -197,7 +192,7 @@ function StatusBadge({ status }) {
       letterSpacing: '0.1em', textTransform: 'uppercase',
       padding: '3px 8px', borderRadius: '999px',
       background: isPrivate ? 'rgba(251,191,36,0.08)' : 'rgba(52,211,153,0.08)',
-      border: `1px solid ${isPrivate ? 'rgba(251,191,36,0.2)' : 'rgba(52,211,153,0.2)'}`,
+      border: '1px solid ' + (isPrivate ? 'rgba(251,191,36,0.2)' : 'rgba(52,211,153,0.2)'),
       color: isPrivate ? '#fbbf24' : '#34d399',
     }}>
       {isPrivate ? 'private repo' : '✓ shipped'}
@@ -205,20 +200,17 @@ function StatusBadge({ status }) {
   )
 }
 
-
-
 function ExperienceCard({ job }) {
   const [expanded, setExpanded] = useState(false)
   const c = colors[job.color]
 
   return (
-    <GlassCard style={{ borderLeft: `2px solid ${c.dot}`, borderRadius: '0 14px 14px 0' }}>
-      {/* Header */}
-      <div
-        onClick={() => setExpanded(!expanded)}
-        style={{ cursor: 'pointer' }}
-      >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px', marginBottom: '8px' }}>
+    <GlassCard style={{ borderLeft: '2px solid ' + c.dot, borderRadius: '0 14px 14px 0' }}>
+      <div onClick={() => setExpanded(!expanded)} style={{ cursor: 'pointer' }}>
+        <div style={{
+          display: 'flex', justifyContent: 'space-between',
+          alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px', marginBottom: '8px',
+        }}>
           <div>
             <div style={{ fontFamily: 'Bricolage Grotesque', fontSize: '18px', fontWeight: 700, color: '#e2dff5', marginBottom: '4px' }}>
               {job.company}
@@ -231,13 +223,13 @@ function ExperienceCard({ job }) {
             <span style={{
               fontFamily: 'JetBrains Mono', fontSize: '10px',
               color: c.text, background: c.bg,
-              border: `1px solid ${c.border}`,
+              border: '1px solid ' + c.border,
               padding: '3px 10px', borderRadius: '999px',
             }}>
               {job.period}
             </span>
             <span style={{ fontFamily: 'JetBrains Mono', fontSize: '10px', color: 'rgba(226,223,245,0.3)' }}>
-              📍 {job.location}
+              {job.location}
             </span>
           </div>
         </div>
@@ -246,30 +238,32 @@ function ExperienceCard({ job }) {
           {job.summary}
         </p>
 
-        {/* Expand toggle */}
         <div style={{ fontFamily: 'JetBrains Mono', fontSize: '10px', color: c.text, letterSpacing: '0.08em' }}>
           {expanded ? '▲ collapse' : '▼ show achievements'}
         </div>
       </div>
 
-      {/* Expandable achievements */}
       {expanded && (
         <div style={{ marginTop: '1.25rem', paddingTop: '1.25rem', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-          <div style={{ fontFamily: 'JetBrains Mono', fontSize: '10px', color: 'rgba(226,223,245,0.25)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '12px' }}>
+          <div style={{
+            fontFamily: 'JetBrains Mono', fontSize: '10px',
+            color: 'rgba(226,223,245,0.25)', letterSpacing: '0.15em',
+            textTransform: 'uppercase', marginBottom: '12px',
+          }}>
             // key achievements
           </div>
           <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
             {job.achievements.map((a, i) => (
               <li key={i} style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
-                <span style={{ color: c.dot, fontFamily: 'JetBrains Mono', fontSize: '12px', flexShrink: 0, marginTop: '1px' }}>→</span>
+                <span style={{ color: c.dot, fontFamily: 'JetBrains Mono', fontSize: '12px', flexShrink: 0, marginTop: '1px' }}>
+                  {'->'}
+                </span>
                 <span style={{ fontFamily: 'JetBrains Mono', fontSize: '11px', color: 'rgba(226,223,245,0.6)', lineHeight: 1.7 }}>
                   {a}
                 </span>
               </li>
             ))}
           </ul>
-
-          {/* Stack used */}
           <div style={{ marginTop: '1rem', display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
             {job.stack.map(s => <Chip key={s} label={s} color={job.color} />)}
           </div>
@@ -278,8 +272,6 @@ function ExperienceCard({ job }) {
     </GlassCard>
   )
 }
-
-
 
 function ProjectCard({ project, color }) {
   const [hovered, setHovered] = useState(false)
@@ -290,15 +282,14 @@ function ProjectCard({ project, color }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        background: hovered ? `${c.bg}` : 'rgba(255,255,255,0.02)',
+        background: hovered ? c.bg : 'rgba(255,255,255,0.02)',
         backdropFilter: 'blur(20px)',
-        border: `1px solid ${hovered ? c.border : 'rgba(255,255,255,0.07)'}`,
+        border: '1px solid ' + (hovered ? c.border : 'rgba(255,255,255,0.07)'),
         borderRadius: '12px', padding: '1.25rem',
         transition: 'all 0.2s ease',
         transform: hovered ? 'translateY(-3px)' : 'translateY(0)',
       }}
     >
-      {/* Top row */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '10px' }}>
         <div>
           <div style={{ fontFamily: 'Bricolage Grotesque', fontSize: '15px', fontWeight: 700, color: '#e2dff5', marginBottom: '4px' }}>
@@ -311,17 +302,14 @@ function ProjectCard({ project, color }) {
         <StatusBadge status={project.status} />
       </div>
 
-      {/* Description */}
       <p style={{ fontFamily: 'JetBrains Mono', fontSize: '11px', color: 'rgba(226,223,245,0.5)', lineHeight: 1.8, marginBottom: '12px' }}>
         {project.desc}
       </p>
 
-      {/* Stack chips */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '14px' }}>
         {project.stack.map(s => <Chip key={s} label={s} color={color} />)}
       </div>
 
-      {/* Links */}
       <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
         {project.github && (
           <a
@@ -332,29 +320,11 @@ function ProjectCard({ project, color }) {
               fontFamily: 'JetBrains Mono', fontSize: '10px',
               letterSpacing: '0.08em', textTransform: 'uppercase',
               padding: '6px 14px', borderRadius: '6px',
-              background: c.bg, border: `1px solid ${c.border}`,
+              background: c.bg, border: '1px solid ' + c.border,
               color: c.text, textDecoration: 'none',
-              transition: 'all 0.2s',
             }}
           >
             ./github
-          </a>
-        )}
-        {project.playstore && (
-          <a
-            href={project.playstore}
-            target="_blank"
-            rel="noreferrer"
-            style={{
-              fontFamily: 'JetBrains Mono', fontSize: '10px',
-              letterSpacing: '0.08em', textTransform: 'uppercase',
-              padding: '6px 14px', borderRadius: '6px',
-              background: 'rgba(52,211,153,0.08)',
-              border: '1px solid rgba(52,211,153,0.2)',
-              color: '#34d399', textDecoration: 'none',
-            }}
-          >
-            ./playstore
           </a>
         )}
         {!project.github && !project.playstore && (
@@ -367,25 +337,34 @@ function ProjectCard({ project, color }) {
   )
 }
 
-
-
-function Work() {
-  const [activeSection, setActiveSection] = useState('experience')
-
- const sidebar = [
+const sidebar = [
   { id: 'experience',     label: 'Experience',     icon: '[work]'  },
   { id: 'mobile',         label: 'Mobile',         icon: '[mob]'   },
   { id: 'backend',        label: 'Backend',        icon: '[api]'   },
   { id: 'infrastructure', label: 'Infrastructure', icon: '[infra]' },
 ]
 
+function Work() {
+  const [activeSection, setActiveSection] = useState('experience')
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
+
+  useEffect(() => {
+    const handle = () => setIsMobile(window.innerWidth < 768)
+    window.addEventListener('resize', handle)
+    return () => window.removeEventListener('resize', handle)
+  }, [])
+
   const activeGroup = projectGroups.find(g => g.id === activeSection)
 
   return (
-    <div style={{ position: 'relative', zIndex: 5, padding: '3rem 2rem', maxWidth: '1100px', margin: '0 auto' }}>
+    <div style={{
+      position: 'relative', zIndex: 5,
+      padding: isMobile ? '2rem 1.25rem' : '3rem 2rem',
+      maxWidth: '1100px', margin: '0 auto',
+    }}>
 
       {/* Page header */}
-      <div style={{ marginBottom: '3rem' }}>
+      <div style={{ marginBottom: '2.5rem' }}>
         <div style={{
           fontFamily: 'JetBrains Mono', fontSize: '10px',
           color: '#34d399', letterSpacing: '0.2em',
@@ -402,7 +381,7 @@ function Work() {
           fontWeight: 800, color: '#e2dff5',
           lineHeight: 1.1, letterSpacing: '-0.02em', marginBottom: '1rem',
         }}>
-          Experience &<br />
+          Experience &amp;<br />
           <span style={{ color: 'transparent', WebkitTextStroke: '1.5px rgba(167,139,250,0.7)' }}>
             Projects.
           </span>
@@ -418,60 +397,83 @@ function Work() {
         </p>
       </div>
 
-      {/* Two-panel layout */}
-      <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: '2rem', alignItems: 'start' }}>
+      {/* Two-panel layout — stacks on mobile */}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: isMobile ? '1fr' : '200px 1fr',
+        gap: isMobile ? '1rem' : '2rem',
+        alignItems: 'start',
+      }}>
 
-        {/* ── LEFT SIDEBAR ── */}
+        {/* Sidebar — horizontal scrollable on mobile, sticky on desktop */}
         <div style={{
           background: 'rgba(255,255,255,0.02)',
           backdropFilter: 'blur(20px)',
           border: '1px solid rgba(255,255,255,0.07)',
           borderRadius: '14px',
           padding: '0.75rem',
-          position: 'sticky',
-          top: '2rem',
+          position: isMobile ? 'relative' : 'sticky',
+          top: isMobile ? 'auto' : '2rem',
         }}>
-          {/* Sidebar terminal bar */}
+          {/* Terminal dots — hide on mobile to save space */}
+          {!isMobile && (
+            <div style={{
+              display: 'flex', gap: '5px', marginBottom: '1rem',
+              paddingBottom: '0.75rem',
+              borderBottom: '1px solid rgba(255,255,255,0.06)',
+            }}>
+              {['#ff5f57','#febc2e','#28c840'].map(c => (
+                <div key={c} style={{ width: 8, height: 8, borderRadius: '50%', background: c }} />
+              ))}
+            </div>
+          )}
+
+          {!isMobile && (
+            <div style={{
+              fontFamily: 'JetBrains Mono', fontSize: '9px',
+              color: 'rgba(226,223,245,0.2)', letterSpacing: '0.15em',
+              marginBottom: '8px', paddingLeft: '4px',
+            }}>
+              // navigate
+            </div>
+          )}
+
+          {/* Nav buttons — row on mobile, column on desktop */}
           <div style={{
-            display: 'flex', gap: '5px', marginBottom: '1rem',
-            paddingBottom: '0.75rem',
-            borderBottom: '1px solid rgba(255,255,255,0.06)',
+            display: 'flex',
+            flexDirection: isMobile ? 'row' : 'column',
+            gap: isMobile ? '6px' : '2px',
+            flexWrap: isMobile ? 'wrap' : 'nowrap',
           }}>
-            {['#ff5f57','#febc2e','#28c840'].map(c => (
-              <div key={c} style={{ width: 8, height: 8, borderRadius: '50%', background: c }} />
+            {sidebar.map(item => (
+              <button
+                key={item.id}
+                onClick={() => setActiveSection(item.id)}
+                style={{
+                  textAlign: 'left',
+                  display: 'flex', alignItems: 'center', gap: '6px',
+                  fontFamily: 'JetBrains Mono',
+                  fontSize: isMobile ? '10px' : '11px',
+                  padding: isMobile ? '6px 10px' : '9px 12px',
+                  borderRadius: '8px',
+                  border: 'none', cursor: 'pointer',
+                  background: activeSection === item.id ? 'rgba(167,139,250,0.15)' : 'transparent',
+                  color: activeSection === item.id ? '#c4b5fd' : 'rgba(226,223,245,0.4)',
+                  borderLeft: isMobile ? 'none' : ('2px solid ' + (activeSection === item.id ? '#a78bfa' : 'transparent')),
+                  borderBottom: isMobile ? ('2px solid ' + (activeSection === item.id ? '#a78bfa' : 'transparent')) : 'none',
+                  transition: 'all 0.15s',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                <span style={{ fontSize: '11px' }}>{item.icon}</span>
+                {item.label}
+              </button>
             ))}
           </div>
-
-          <div style={{ fontFamily: 'JetBrains Mono', fontSize: '9px', color: 'rgba(226,223,245,0.2)', letterSpacing: '0.15em', marginBottom: '8px', paddingLeft: '4px' }}>
-            // navigate
-          </div>
-
-          {sidebar.map(item => (
-            <button
-              key={item.id}
-              onClick={() => setActiveSection(item.id)}
-              style={{
-                width: '100%', textAlign: 'left',
-                display: 'flex', alignItems: 'center', gap: '8px',
-                fontFamily: 'JetBrains Mono', fontSize: '11px',
-                padding: '9px 12px', borderRadius: '8px',
-                border: 'none', cursor: 'pointer', marginBottom: '2px',
-                background: activeSection === item.id ? 'rgba(167,139,250,0.15)' : 'transparent',
-                color: activeSection === item.id ? '#c4b5fd' : 'rgba(226,223,245,0.4)',
-                borderLeft: activeSection === item.id ? '2px solid #a78bfa' : '2px solid transparent',
-                transition: 'all 0.15s',
-              }}
-            >
-              <span style={{ fontSize: '13px' }}>{item.icon}</span>
-              {item.label}
-            </button>
-          ))}
         </div>
 
-        {/* ── RIGHT CONTENT ── */}
+        {/* Right content */}
         <div>
-
-          {/* Experience section */}
           {activeSection === 'experience' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div style={{
@@ -487,7 +489,6 @@ function Work() {
             </div>
           )}
 
-          {/* Project group sections */}
           {activeGroup && (
             <div>
               <div style={{
