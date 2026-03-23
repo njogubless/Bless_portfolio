@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 from rest_framework.test import APIClient
-from .models import Project, Message
+from .models import Project, Message,BlogPost
 
 class ProjectAPITest(TestCase):
 
@@ -112,3 +112,55 @@ class ProjectWriteProtectionTest(TestCase):
             format='json'
         )
         self.assertEqual(response.status_code, 401)
+
+
+
+class BlogAPITest(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+        BlogPost.objects.create(
+            title = 'How HIkers Afrique was bilt and the STACK behind it',
+            slug = 'Hikers-Afrique-STACK',
+            excerpt = ' A detailed look into the tech stack and architecture of Hikers Afrique, a mobile app built with Flutter and Firebase.',
+            content = ' Hikers Afrique is a mobile app designed to connect hikers across the African continent, providing a platform for sharing trails, tips, and experiences. The app was built using Flutter for the frontend and Firebase for the backend, leveraging the strengths of both technologies to create a seamless user experience.',
+            category = ' mobile',
+            tags = ' Flutter , Firebase , Dart',
+            published = True,
+        )
+        BlogPost.objects.create(
+            title = 'Draft post',
+            slug = ' draft-post',
+            excerpt = ' This is a draft post that should not appear in the public API.',
+            content = ' Draft content',
+            category = 'career',
+            published = False,
+        )
+
+def test_blog_list_returns_only_published(self):
+    response = self.client.get('/api/blog/')
+    self.assertEqual(response.status_code,200)
+    self.assertEqual(len(response.data), 1)
+
+def test_blog_detail_by_slug(self):
+    response = self.client.get('/api/blog/hikers-afrique-stack/')
+    self.assertEqual(response.status_code, 200)
+    self.assertEqual(response.data['title'], ' How HIkers Afrique was bilt and the STACK behind it')
+
+def test_draft_not_accessible(self):
+    response = self.client.get('/api/blog/how-i-built-hikers-afrique/')
+    self.assertIn('content', response.data)
+
+
+def test_blog_filter_by_category(self):
+    response = self.client.get('/api/blog/?category=mobile')
+    self.assertEqual(len(response.data), 1)
+
+def test_draft_not_accessible(self):
+    response = self.client.get('/api/blog/draft-post/')
+    self.assertEqual(response.status_code, 404)
+
+def test_reading_time_present(self):
+    response = self.client.get('/api/blog/how-i-built-hikers-afrique/')
+    self.assertIn('reading_time', response.data)
+
+    
