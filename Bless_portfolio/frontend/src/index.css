@@ -10,3 +10,14 @@ body {
   font-family: 'Bricolage Grotesque', sans-serif;
   min-height: 100vh;
 }
+
+/* Mobile breakpoint helpers */
+@media (max-width: 768px) {
+  .hide-mobile { display: none !important; }
+  .show-mobile { display: flex !important; }
+}
+
+@media (min-width: 769px) {
+  .hide-desktop { display: none !important; }
+  .show-desktop { display: flex !important; }
+}
