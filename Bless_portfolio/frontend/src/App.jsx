@@ -6,6 +6,8 @@ import Home       from './pages/Home'
 import About      from './pages/About'
 import Work       from './pages/Work'
 import Contact    from './pages/Contact'
+import Blog       from './pages/Blog'
+import BlogPost   from './pages/BlogPost'
 
 function App() {
   return (
@@ -14,10 +16,12 @@ function App() {
       <Navbar />
       <div style={{ flex: 1 }}>
         <Routes>
-          <Route path="/"        element={<Home />}    />
-          <Route path="/about"   element={<About />}   />
-          <Route path="/work"    element={<Work />}    />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/"           element={<Home />}     />
+          <Route path="/about"      element={<About />}    />
+          <Route path="/work"       element={<Work />}     />
+          <Route path="/contact"    element={<Contact />}  />
+          <Route path="/blog"       element={<Blog />}     />
+          <Route path="/blog/:slug" element={<BlogPost />} />
         </Routes>
       </div>
       <Footer />
