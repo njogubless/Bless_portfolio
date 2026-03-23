@@ -1,3 +1,4 @@
+import React, {useState} from 'react'
 import { NavLink } from 'react-router-dom'
 
 const socials = [
@@ -73,7 +74,7 @@ const navLinks = [
 const techStack = ['Flutter', 'Python', 'Django', 'Docker', 'AWS', 'React']
 
 function Footer() {
-  const [hoveredSocial, setHoveredSocial] = React.useState(null)
+  const [hoveredSocial, setHoveredSocial] = useState(null)
 
   return (
     <footer style={{
