@@ -307,7 +307,7 @@ function About() {
               <div style={{ paddingLeft: '1.5rem' }}><span style={{ color: '#c4b5fd' }}>available</span>: <span style={{ color: '#34d399' }}>true</span>,</div>
               <div style={{ paddingLeft: '1.5rem' }}><span style={{ color: '#c4b5fd' }}>languages</span>: [<span style={{ color: '#fbbf24' }}>"Dart"</span>, <span style={{ color: '#fbbf24' }}>"Flutter"</span>, <span style={{ color: '#fbbf24' }}>"Python"</span>, <span style={{ color: '#fbbf24' }}>"JavaScript"</span>],</div>
               <div style={{ paddingLeft: '1.5rem' }}><span style={{ color: '#c4b5fd' }}>currentlyLearning</span>: <span style={{ color: '#fbbf24' }}>"React"</span>,</div>
-              <div style={{ paddingLeft: '1.5rem' }}><span style={{ color: '#c4b5fd' }}>funFact</span>: <span style={{ color: '#fbbf24' }}>"I debug better with coffee ☕"</span>,</div>
+              <div style={{ paddingLeft: '1.5rem' }}><span style={{ color: '#c4b5fd' }}>funFact</span>: <span style={{ color: '#fbbf24' }}>"I built everything from Scratch, it being my first time with REACT.JS(pretty okay work I guess) ☕"</span>,</div>
               <div>{'}'}</div>
             </div>
           </GlassCard>
