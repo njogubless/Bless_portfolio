@@ -6,6 +6,7 @@ const links = [
   { label: 'work',    path: '/work'    },
   { label: 'about',   path: '/about'   },
   { label: 'contact', path: '/contact' },
+  { label: 'blog',    path: '/blog'    },
 ]
 
 function Navbar() {
