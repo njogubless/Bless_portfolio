@@ -52,7 +52,7 @@ class BlogPostListView(generics.ListAPIView):
 
 
 class BlogPostDetailView(generics.RetrieveAPIView):
-    serialzer_class = BlogPostDetailSerializer
+    serializer_class = BlogPostDetailSerializer
     permission_classes = [permissions.AllowAny]
     queryset = BlogPost.objects.filter(published=True)
     lookup_field = 'slug'
