@@ -25,7 +25,7 @@ class BlogPostListSerializer(serializers.ModelSerializer):
         model = BlogPost
         fields =[
             'id', 'title', 'slug', 'excerpt',
-            'catergory', 'tags_list', 'cover',
+            'category', 'tags_list', 'cover',
             'reading_time','created_at',
         ]
  
@@ -37,6 +37,6 @@ class BlogPostDetailSerializer(serializers.ModelSerializer):
         model = BlogPost
         fields =[
             'id', 'title', 'slug', 'excerpt',
-            'content', 'catergory', 'tags_list',
+            'content', 'category', 'tags_list',
             'cover', 'reading_time','created_at',
         ]
