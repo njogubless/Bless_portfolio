@@ -1,3 +1,5 @@
+import threading
+
 from rest_framework import generics, permissions
 from .models import Project, Message , BlogPost
 from .serializers import ProjectSerializer, MessageSerializer, BlogPostDetailSerializer, BlogPostListSerializer
@@ -12,24 +14,29 @@ class ProjectListView(generics.ListCreateAPIView):
             return [permissions.AllowAny()]
         return [permissions.IsAuthenticated()]
 
-
-from django.core.mail import send_mail
-
 class MessageCreateView(generics.CreateAPIView):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
     permission_classes = [permissions.AllowAny]
 
-    def perform_create(self, serializer):
+    def perfom_create(self, serializer):
         instance = serializer.save()
-        send_mail(
-            subject=f"Portfolio contact: {instance.subject}",
-            message=f"From: {instance.name} <{instance.email}>\n\n{instance.body}",
-            from_email='njogubless2@gmail.com',
-            recipient_list=['njogubless2@gmail.com'],
-            fail_silently=True,
-        )
+        thread = threading.Thread(target=self._send_email_notification, args=(instance,))
+        thread.daemon = True
+        thread.start()
 
+    def _send_email_notification(self,instance):
+        try:
+            send_mail(
+                subject=f"Portfolio contact: {instance.subject}",
+                message=f"From: {instance.name}<{instance.email}>\n\n{instance.body}",
+                from_email=['njogubless2@gmail.com'],
+                recipient_list=['njogubless2@gmail.com'],
+                fail_silently= True,
+            )
+
+        except Exception as e:
+            print(f"Failed to send email notification: {e}")
 
 class MessageListView(generics.ListAPIView):
     queryset         = Message.objects.all()
