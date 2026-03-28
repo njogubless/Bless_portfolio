@@ -21,11 +21,11 @@ class MessageCreateView(generics.CreateAPIView):
 
     def perfom_create(self, serializer):
         instance = serializer.save()
-        thread = threading.Thread(target=self._send_email_notification, args=(instance,))
+        thread = threading.Thread(target=self._send_notification, args=(instance,))
         thread.daemon = True
         thread.start()
 
-    def _send_email_notification(self,instance):
+    def _send_notification(self,instance):
         try:
             send_mail(
                 subject=f"Portfolio contact: {instance.subject}",
