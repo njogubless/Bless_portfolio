@@ -50,13 +50,26 @@ const projectGroups = [
     description: 'Cross-platform mobile applications built with Flutter and Dart',
     projects: [
       {
-        name: 'Hikers Afrique',
-        period: 'Jan 2024 — Mar 2024',
-        desc: 'Cross-platform mobile app for joining, interacting, and managing hiking adventures and social events. Real-time data sync, authentication and cloud storage via Firebase. State managed with Providers.',
-        stack: ['Flutter', 'Dart', 'Firebase', 'Providers'],
-        github: 'https://github.com/njogubless/HikersAfrique',
+        name: 'CHANGA',
+        period: 'March 2026 — May 2026',
+        desc: `Changa modernises group fundraising for East Africa. Built on Flutter and FastAPI, it lets communities create shared funding projects, monitor real-time contribution progress, and pay instantly via M-Pesa Daraja or Airtel Money APIs — the two dominant mobile money networks in the region.
+               The backend is a production-ready async REST API with JWT authentication, role-based project membership, and a payment reconciliation system that handles asynchronous mobile money callbacks. The entire stack runs in Docker, with PostgreSQL for data persistence and pgAdmin for database management.
+        Stack: Flutter 3 · Dart · Riverpod · FastAPI · PostgreSQL · Docker · M-Pesa Daraja · Airtel Money API`,
+        stack: ['Flutter', 'Dart', 'CI/CD', 'FastAPI-python', 'Docker'],
+        github: 'https://github.com/njogubless/changa',
         playstore: null,
-        status: 'shipped',
+        status: 'in production',
+      },
+      {
+        name: 'Market_Place App Web',
+        period: 'April 2026 — May 2026',
+        desc: `TechVault is a full-stack multi-vendor marketplace for tech products — laptops, software, audio gear, gaming hardware, and more.
+         Built from scratch with a React frontend and a Django REST Framework backend, it features JWT-based authentication, a multi-category product catalog with filtering and search, vendor profiles with ratings and statistics, a persistent shopping cart, and a fully documented REST API.
+         The frontend uses TanStack Query for intelligent data caching and stale/fresh lifecycle management, while the backend uses PostgreSQL with optimized querysets to avoid N+1 performance issues.`,
+        stack: ['Django', 'React', 'PostgreSQL', 'Tanstack-query'],
+        github: 'https://github.com/njogubless/MarketPlace',
+        playstore: null,
+        status: 'in-production',
       },
       {
         name: 'Reflections on Faith',
@@ -65,8 +78,18 @@ const projectGroups = [
         stack: ['Flutter', 'Dart', 'Firebase', 'CI/CD'],
         github: 'https://github.com/njogubless/PROJECT',
         playstore: null,
-        status: 'shipped',
+        status: 'in-production',
       },
+      {
+        name: 'Hikers Afrique',
+        period: 'Jan 2024 — Mar 2024',
+        desc: 'Cross-platform mobile app for joining, interacting, and managing hiking adventures and social events. Real-time data sync, authentication and cloud storage via Firebase. State managed with Providers.',
+        stack: ['Flutter', 'Dart', 'Firebase', 'Providers'],
+        github: 'https://github.com/njogubless/HikersAfrique',
+        playstore: null,
+        status: 'in-production',
+      },
+
       {
         name: 'Hikers Afrique Web Admin',
         period: 'Jan 2024 — Apr 2025',
@@ -74,7 +97,7 @@ const projectGroups = [
         stack: ['Flutter Web', 'Dart', 'Firebase', 'Providers'],
         github: 'https://github.com/njogubless/webdashboard',
         playstore: null,
-        status: 'shipped',
+        status: 'in-production',
       },
     ],
   },
@@ -136,22 +159,22 @@ const projectGroups = [
 
 const colors = {
   purple: {
-    bg:     'rgba(167,139,250,0.08)',
+    bg: 'rgba(167,139,250,0.08)',
     border: 'rgba(167,139,250,0.25)',
-    text:   '#c4b5fd',
-    dot:    '#a78bfa',
+    text: '#c4b5fd',
+    dot: '#a78bfa',
   },
   green: {
-    bg:     'rgba(52,211,153,0.08)',
+    bg: 'rgba(52,211,153,0.08)',
     border: 'rgba(52,211,153,0.2)',
-    text:   '#6ee7b7',
-    dot:    '#34d399',
+    text: '#6ee7b7',
+    dot: '#34d399',
   },
   amber: {
-    bg:     'rgba(251,191,36,0.08)',
+    bg: 'rgba(251,191,36,0.08)',
     border: 'rgba(251,191,36,0.18)',
-    text:   '#fbbf24',
-    dot:    '#f59e0b',
+    text: '#fbbf24',
+    dot: '#f59e0b',
   },
 }
 
@@ -338,9 +361,9 @@ function ProjectCard({ project, color }) {
 }
 
 const sidebar = [
-  { id: 'experience',     label: 'Experience',     icon: '[work]'  },
-  { id: 'mobile',         label: 'Mobile',         icon: '[mob]'   },
-  { id: 'backend',        label: 'Backend',        icon: '[api]'   },
+  { id: 'experience', label: 'Experience', icon: '[work]' },
+  { id: 'mobile', label: 'Mobile', icon: '[mob]' },
+  { id: 'backend', label: 'Backend', icon: '[api]' },
   { id: 'infrastructure', label: 'Infrastructure', icon: '[infra]' },
 ]
 
@@ -422,7 +445,7 @@ function Work() {
               paddingBottom: '0.75rem',
               borderBottom: '1px solid rgba(255,255,255,0.06)',
             }}>
-              {['#ff5f57','#febc2e','#28c840'].map(c => (
+              {['#ff5f57', '#febc2e', '#28c840'].map(c => (
                 <div key={c} style={{ width: 8, height: 8, borderRadius: '50%', background: c }} />
               ))}
             </div>
