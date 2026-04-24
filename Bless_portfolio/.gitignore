@@ -26,3 +26,5 @@ gunicorn.ctl
 # IDE
 .vscode/
 .idea/
+
+.ENV
