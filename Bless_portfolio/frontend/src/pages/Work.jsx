@@ -126,6 +126,15 @@ const projectGroups = [
         playstore: null,
         status: 'private',
       },
+       {
+        name: 'DevOps Infrastructure for Report Management System',
+        period: '2023 — 2024',
+        desc: 'End-to-end DevOps infrastructure for a Django-based report management system. Terraform provisions cloud resources, Ansible configures servers idempotently, Docker containerises the app, and Kubernetes orchestrates it at scale. Every push to main triggers a Travis CI pipeline that builds, tests, and deploys automatically — with Prometheus monitoring and Nginx reverse proxy completing the stack.',
+        stack: ['Python', 'Django', 'PostgreSQL', 'JWT','Docker', 'Nginx','Terraform', 'Prometheus','Grafana'],
+        github: 'https://github.com/njogubless/Report_Management-_System',
+        playstore: null,
+        status: 'in-production',
+      },
     ],
   },
   {
