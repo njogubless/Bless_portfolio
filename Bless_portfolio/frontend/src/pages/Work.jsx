@@ -76,7 +76,7 @@ const projectGroups = [
         period: 'Jan 2025 — Mar 2025',
         desc: 'Mobile forum app featuring audio recording and in-chat Q&A interactions. Built with Flutter and Firebase for auth and storage. CI/CD pipeline for continuous deployment after production.',
         stack: ['Flutter', 'Dart', 'Firebase', 'CI/CD'],
-        github: 'https://github.com/njogubless/PROJECT',
+        github: 'https://github.com/njogubless/Reflection_On_Faith',
         playstore: null,
         status: 'in-production',
       },
