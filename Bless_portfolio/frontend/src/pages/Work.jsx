@@ -43,11 +43,11 @@ const experience = [
 
 const projectGroups = [
   {
-    id: 'mobile',
-    label: 'Mobile',
+    id: 'mobile & web',
+    label: 'Mobile & Web',
     icon: '[mob]',
     color: 'purple',
-    description: 'Cross-platform mobile applications built with Flutter and Dart',
+    description: 'Cross-platform mobile and web applications built with Flutter and Dart',
     projects: [
       {
         name: 'CHANGA',
@@ -371,7 +371,7 @@ function ProjectCard({ project, color }) {
 
 const sidebar = [
   { id: 'experience', label: 'Experience', icon: '[work]' },
-  { id: 'mobile', label: 'Mobile', icon: '[mob]' },
+  { id: 'mobile', label: 'Mobile & Web', icon: '[mob]' },
   { id: 'backend', label: 'Backend', icon: '[api]' },
   { id: 'infrastructure', label: 'Infrastructure', icon: '[infra]' },
 ]
