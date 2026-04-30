@@ -90,7 +90,8 @@ function Hero() {
 
                     {/* Resume */}
                     <a
-                        href="https://drive.google.com/file/d/1Nx7bRClHNlHRQTk2tFBRgLTlKUXyGLWV/view?usp=sharing"
+                        href="https://drive.google.com/file/d/1KjQzatlHPCOa0ZNacwFtbJ06ZwF5XIzx/view?usp=sharing"
+                        
                         target="_blank"
                         rel="noopener noreferrer"
                         style={{ textDecoration: 'none' }}
