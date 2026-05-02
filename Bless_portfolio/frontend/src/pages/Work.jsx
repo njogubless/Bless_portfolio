@@ -2,11 +2,30 @@ import { useState, useEffect } from 'react'
 
 const experience = [
   {
+    id: 'Salamander',
+    company: 'Salamander Tech-Hub',
+    role: 'Lead Backend Developer',
+    type: 'OpenSource Contribution',
+    period: '2026 — todate',
+    location: 'Remote',
+    color: 'amber',
+    summary: 'Led backend architecture and technical decisions for a multi-client platform serving web and mobile apps.',
+    achievements: [
+      'Owned PostgreSQL schema design, migrations, API contracts, and data integrity.',
+      'Built scalable backend services using Python, Django, FastAPI, and REST APIs.',
+      '​ Managed Supabase authentication, RPCs, RLS policies, and Edge Functions.',
+      'Established engineering workflows for schema changes, PR approvals, and backend governance.',
+      'Deployed and maintained infrastructure using Docker, AWS, Terraform, Kubernetes and Ansible.',
+      'Coordinated with frontend/mobile teams to ensure reliable integrations.'
+    ],
+    stack: ['Python', 'Django', 'PostgreSQL', 'Docker', 'JWT', 'CI/CD', 'Docker', 'Supabase', 'AWS', 'Terraform', 'Kubernetes', 'Ansible'],
+  },
+  {
     id: 'reduzer',
     company: 'Reduzer Technologies',
     role: 'Mid-Level Flutter Developer',
     type: 'Contract',
-    period: '2023 — 2024',
+    period: '2025 — 2025',
     location: 'Remote',
     color: 'purple',
     summary: 'Joined as a Flutter contractor to overhaul the codebase, build a robust backend, and ship a production-ready mobile product.',
@@ -126,11 +145,11 @@ const projectGroups = [
         playstore: null,
         status: 'private',
       },
-       {
+      {
         name: 'DevOps Infrastructure for Report Management System',
         period: '2023 — 2024',
         desc: 'End-to-end DevOps infrastructure for a Django-based report management system. Terraform provisions cloud resources, Ansible configures servers idempotently, Docker containerises the app, and Kubernetes orchestrates it at scale. Every push to main triggers a Travis CI pipeline that builds, tests, and deploys automatically — with Prometheus monitoring and Nginx reverse proxy completing the stack.',
-        stack: ['Python', 'Django', 'PostgreSQL', 'JWT','Docker', 'Nginx','Terraform', 'Prometheus','Grafana'],
+        stack: ['Python', 'Django', 'PostgreSQL', 'JWT', 'Docker', 'Nginx', 'Terraform', 'Prometheus', 'Grafana'],
         github: 'https://github.com/njogubless/Report_Management-_System',
         playstore: null,
         status: 'in-production',
