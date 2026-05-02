@@ -371,7 +371,7 @@ function ProjectCard({ project, color }) {
 
 const sidebar = [
   { id: 'experience', label: 'Experience', icon: '[work]' },
-  { id: 'mobile', label: 'Mobile & Web', icon: '[mob]' },
+  { id: 'mobile & web', label: 'Mobile & Web', icon: '[mob]' },
   { id: 'backend', label: 'Backend', icon: '[api]' },
   { id: 'infrastructure', label: 'Infrastructure', icon: '[infra]' },
 ]
