@@ -27,7 +27,7 @@ const experience = [
     type: 'Contract',
     period: '2025 — 2025',
     location: 'Remote',
-    color: 'red',
+    color: 'purple',
     summary: 'Joined as a Flutter contractor to overhaul the codebase, build a robust backend, and ship a production-ready mobile product.',
     achievements: [
       'Analyzed and refactored existing codebase to meet quality software standards',
