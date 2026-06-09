@@ -1,8 +1,6 @@
-import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
-
-const API_BASE = 'https://bless-portfolio-1.onrender.com/api/blog/'
+import posts from '../data/posts'
 
 const categoryColors = {
   mobile:         { bg: 'rgba(167,139,250,0.1)',  border: 'rgba(167,139,250,0.25)', text: '#c4b5fd' },
@@ -13,53 +11,12 @@ const categoryColors = {
 }
 
 function BlogPost() {
-  const { slug }    = useParams()
-  const navigate    = useNavigate()
-  const [post, setPost]       = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError]     = useState(false)
+  const { slug }  = useParams()
+  const navigate  = useNavigate()
 
-  useEffect(() => {
-    fetch(API_BASE + slug + '/')
-      .then(res => {
-        if (!res.ok) throw new Error('HTTP ' + res.status)
-        return res.json()
-      })
-      .then(data => {
-        setPost(data)
-        setLoading(false)
-      })
-      .catch(() => {
-        setError(true)
-        setLoading(false)
-      })
-  }, [slug])
+  const post = posts.find(p => p.slug === slug)
 
-  const c = post ? (categoryColors[post.category] || categoryColors.backend) : categoryColors.backend
-
-  const date = post
-    ? new Date(post.created_at).toLocaleDateString('en-KE', {
-        year: 'numeric', month: 'long', day: 'numeric',
-      })
-    : ''
-
-  if (loading) return (
-    <div style={{ padding: '3rem 2rem', maxWidth: '720px', margin: '0 auto' }}>
-      {[60, 80, 40, 100, 90, 70, 95, 60].map((w, i) => (
-        <div key={i} style={{
-          height: i === 0 ? '40px' : '14px',
-          width: w + '%',
-          background: 'rgba(255,255,255,0.05)',
-          borderRadius: '6px', marginBottom: '16px',
-          animation: 'shimmer 1.5s ease-in-out infinite',
-          animationDelay: i * 0.08 + 's',
-        }} />
-      ))}
-      <style>{`@keyframes shimmer{0%,100%{opacity:0.4}50%{opacity:0.8}}`}</style>
-    </div>
-  )
-
-  if (error) return (
+  if (!post) return (
     <div style={{
       padding: '3rem 2rem', maxWidth: '720px', margin: '0 auto',
       fontFamily: 'JetBrains Mono', fontSize: '12px',
@@ -81,6 +38,11 @@ function BlogPost() {
     </div>
   )
 
+  const c = categoryColors[post.category] || categoryColors.backend
+  const date = new Date(post.created_at).toLocaleDateString('en-KE', {
+    year: 'numeric', month: 'long', day: 'numeric',
+  })
+
   return (
     <div style={{
       position: 'relative', zIndex: 5,
@@ -95,8 +57,7 @@ function BlogPost() {
           display: 'flex', alignItems: 'center', gap: '6px',
           background: 'none', border: 'none', cursor: 'pointer',
           color: 'rgba(226,223,245,0.4)', marginBottom: '2rem',
-          padding: 0, letterSpacing: '0.05em',
-          transition: 'color 0.2s',
+          padding: 0, letterSpacing: '0.05em', transition: 'color 0.2s',
         }}
         onMouseOver={e => e.currentTarget.style.color = '#a78bfa'}
         onMouseOut={e => e.currentTarget.style.color = 'rgba(226,223,245,0.4)'}
@@ -109,8 +70,7 @@ function BlogPost() {
         <span style={{
           fontFamily: 'JetBrains Mono', fontSize: '10px',
           padding: '3px 10px', borderRadius: '6px',
-          background: c.bg, border: '1px solid ' + c.border,
-          color: c.text,
+          background: c.bg, border: '1px solid ' + c.border, color: c.text,
         }}>
           {post.category}
         </span>
@@ -127,8 +87,7 @@ function BlogPost() {
         fontFamily: 'Bricolage Grotesque',
         fontSize: 'clamp(1.8rem, 5vw, 2.8rem)',
         fontWeight: 800, color: '#e2dff5',
-        lineHeight: 1.2, letterSpacing: '-0.02em',
-        marginBottom: '1rem',
+        lineHeight: 1.2, letterSpacing: '-0.02em', marginBottom: '1rem',
       }}>
         {post.title}
       </h1>
@@ -137,8 +96,7 @@ function BlogPost() {
       <p style={{
         fontFamily: 'JetBrains Mono', fontSize: '13px',
         color: 'rgba(226,223,245,0.5)', lineHeight: 1.9,
-        marginBottom: '2rem',
-        paddingBottom: '2rem',
+        marginBottom: '2rem', paddingBottom: '2rem',
         borderBottom: '1px solid rgba(255,255,255,0.07)',
       }}>
         {post.excerpt}
@@ -162,85 +120,45 @@ function BlogPost() {
       )}
 
       {/* Markdown content */}
-      <div style={{ fontFamily: 'JetBrains Mono' }}>
+      <div>
         <style>{`
           .blog-content h1, .blog-content h2, .blog-content h3 {
             font-family: 'Bricolage Grotesque', sans-serif;
-            color: #e2dff5;
-            font-weight: 700;
-            margin: 2rem 0 1rem;
-            line-height: 1.3;
+            color: #e2dff5; font-weight: 700;
+            margin: 2rem 0 1rem; line-height: 1.3;
           }
           .blog-content h1 { font-size: 1.8rem; }
           .blog-content h2 { font-size: 1.4rem; color: rgba(226,223,245,0.9); }
           .blog-content h3 { font-size: 1.1rem; color: rgba(226,223,245,0.8); }
           .blog-content p {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
-            color: rgba(226,223,245,0.65);
-            line-height: 2;
-            margin-bottom: 1.25rem;
+            font-family: 'JetBrains Mono', monospace; font-size: 13px;
+            color: rgba(226,223,245,0.65); line-height: 2; margin-bottom: 1.25rem;
           }
           .blog-content code {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            background: rgba(167,139,250,0.1);
-            border: 1px solid rgba(167,139,250,0.2);
-            color: #c4b5fd;
-            padding: 2px 6px;
-            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace; font-size: 12px;
+            background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.2);
+            color: #c4b5fd; padding: 2px 6px; border-radius: 4px;
           }
           .blog-content pre {
-            background: rgba(10,8,25,0.8);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 10px;
-            padding: 1.25rem;
-            overflow-x: auto;
-            margin: 1.5rem 0;
+            background: rgba(10,8,25,0.8); border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 10px; padding: 1.25rem; overflow-x: auto; margin: 1.5rem 0;
           }
           .blog-content pre code {
-            background: none;
-            border: none;
-            padding: 0;
-            font-size: 12px;
-            color: #34d399;
+            background: none; border: none; padding: 0; font-size: 12px; color: #34d399;
           }
-          .blog-content ul, .blog-content ol {
-            padding-left: 1.5rem;
-            margin-bottom: 1.25rem;
-          }
+          .blog-content ul, .blog-content ol { padding-left: 1.5rem; margin-bottom: 1.25rem; }
           .blog-content li {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
-            color: rgba(226,223,245,0.65);
-            line-height: 2;
+            font-family: 'JetBrains Mono', monospace; font-size: 13px;
+            color: rgba(226,223,245,0.65); line-height: 2;
           }
           .blog-content blockquote {
-            border-left: 3px solid #a78bfa;
-            padding: 0.5rem 0 0.5rem 1.25rem;
-            margin: 1.5rem 0;
-            background: rgba(167,139,250,0.05);
-            border-radius: 0 8px 8px 0;
+            border-left: 3px solid #a78bfa; padding: 0.5rem 0 0.5rem 1.25rem;
+            margin: 1.5rem 0; background: rgba(167,139,250,0.05); border-radius: 0 8px 8px 0;
           }
-          .blog-content blockquote p {
-            color: rgba(226,223,245,0.5);
-            font-style: italic;
-            margin: 0;
-          }
-          .blog-content a {
-            color: #a78bfa;
-            text-decoration: none;
-            border-bottom: 1px solid rgba(167,139,250,0.3);
-          }
-          .blog-content hr {
-            border: none;
-            border-top: 1px solid rgba(255,255,255,0.07);
-            margin: 2rem 0;
-          }
-          .blog-content strong {
-            color: #e2dff5;
-            font-weight: 500;
-          }
+          .blog-content blockquote p { color: rgba(226,223,245,0.5); font-style: italic; margin: 0; }
+          .blog-content a { color: #a78bfa; text-decoration: none; border-bottom: 1px solid rgba(167,139,250,0.3); }
+          .blog-content hr { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 2rem 0; }
+          .blog-content strong { color: #e2dff5; font-weight: 500; }
         `}</style>
         <div className="blog-content">
           <ReactMarkdown>{post.content}</ReactMarkdown>
@@ -260,8 +178,7 @@ function BlogPost() {
             fontFamily: 'JetBrains Mono', fontSize: '11px',
             padding: '10px 20px', borderRadius: '8px', cursor: 'pointer',
             background: 'rgba(167,139,250,0.1)',
-            border: '1px solid rgba(167,139,250,0.25)',
-            color: '#c4b5fd',
+            border: '1px solid rgba(167,139,250,0.25)', color: '#c4b5fd',
           }}
         >
           {'<-'} all posts
