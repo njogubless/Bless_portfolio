@@ -1,19 +1,21 @@
-// src/data/posts.js
-// Static blog posts — replaces the Django API at /api/blog/
-// Shape matches Blog.jsx and BlogPost.jsx expectations.
+// Static blog content. Content is preserved verbatim from the original
+// site's data/posts.js. See ADR-002 in README for why this stays static
+// rather than round-tripping through the Django /api/blog/ endpoints
+// (which exist in the backend but were already orphaned in the previous
+// build — the frontend never actually called them).
 
 const posts = [
   {
     id: 1,
     slug: 'flutter-state-management-riverpod',
     title: 'Why I switched to Riverpod for Flutter state management',
-    excerpt: 'After wrestling with Provider and Bloc, Riverpod clicked. Here\'s what changed and why I haven\'t looked back.',
+    excerpt:
+      "After wrestling with Provider and Bloc, Riverpod clicked. Here's what changed and why I haven't looked back.",
     category: 'mobile',
-    reading_time: '5 min read',
-    created_at: '2026-03-10T08:00:00Z',
-    tags_list: ['flutter', 'riverpod', 'dart', 'state-management'],
-    content: `
-## The problem with Provider
+    readingTime: '5 min read',
+    createdAt: '2026-03-10',
+    tags: ['flutter', 'riverpod', 'dart', 'state-management'],
+    content: `## The problem with Provider
 
 Provider works, but it starts to feel brittle as your app grows. Widget trees get deep, context lookups get messy, and testing becomes a chore.
 
@@ -33,20 +35,19 @@ final userProvider = FutureProvider<User>((ref) async {
 
 ## Conclusion
 
-If you're starting a new Flutter project, start with Riverpod. The learning curve is real but short, and the payoff in maintainability is worth it.
-    `,
+If you're starting a new Flutter project, start with Riverpod. The learning curve is real but short, and the payoff in maintainability is worth it.`,
   },
   {
     id: 2,
     slug: 'dockerising-django-production',
     title: 'Dockerising a Django app for production — the right way',
-    excerpt: 'Most Docker tutorials stop at "it runs locally." Here\'s how I actually ship Django to production with Docker Compose, Nginx, and CI/CD.',
+    excerpt:
+      'Most Docker tutorials stop at "it runs locally." Here\'s how I actually ship Django to production with Docker Compose, Nginx, and CI/CD.',
     category: 'backend',
-    reading_time: '8 min read',
-    created_at: '2026-02-18T08:00:00Z',
-    tags_list: ['django', 'docker', 'devops', 'nginx', 'ci-cd'],
-    content: `
-## Why most Docker setups break in production
+    readingTime: '8 min read',
+    createdAt: '2026-02-18',
+    tags: ['django', 'docker', 'devops', 'nginx', 'ci-cd'],
+    content: `## Why most Docker setups break in production
 
 A \`Dockerfile\` that works on your laptop often fails in prod because of missing environment variables, wrong user permissions, or a dev server (runserver) masquerading as production.
 
@@ -78,32 +79,32 @@ Nginx handles SSL termination and serves \`/static/\` directly — keeping Gunic
 
 ## CI/CD
 
-On every push to \`main\`, GitHub Actions runs tests, builds the image, pushes to Docker Hub, and SSH-deploys to the server. Zero-downtime via \`docker compose up -d --no-deps app\`.
+On every push to \`main\`, GitHub Actions runs tests, builds the image, pushes to a registry, and deploys. Zero-downtime via \`docker compose up -d --no-deps app\`.
 
 ## Key lessons
 
-1. Never use \`runserver\` in production
-2. Always set \`DEBUG=False\` via environment variables, not hardcoded
-3. Collect static files at build time, not runtime
-    `,
+1. Never use \`runserver\` in production.
+2. Always set \`DEBUG=False\` via environment variables, not hardcoded.
+3. Collect static files at build time, not runtime.`,
   },
   {
     id: 3,
     slug: 'kubernetes-for-solo-devs',
-    title: 'Kubernetes is worth learning even if you\'re a solo developer',
-    excerpt: 'You don\'t need a team of 50 to benefit from K8s. Here\'s how I use Minikube locally and why it made me a better engineer.',
+    title: "Kubernetes is worth learning even if you're a solo developer",
+    excerpt:
+      "You don't need a team of 50 to benefit from K8s. Here's how I use Minikube locally and why it made me a better engineer.",
     category: 'infrastructure',
-    reading_time: '6 min read',
-    created_at: '2026-01-22T08:00:00Z',
-    tags_list: ['kubernetes', 'devops', 'docker', 'infrastructure'],
-    content: `
-## The "you don't need K8s" argument
+    readingTime: '6 min read',
+    createdAt: '2026-01-22',
+    tags: ['kubernetes', 'devops', 'docker', 'infrastructure'],
+    content: `## The "you don't need K8s" argument
 
 It's true — most solo projects don't need Kubernetes in production. But learning it changes how you think about deployments, scaling, and fault tolerance.
 
 ## What I built
 
 A Django app running on Minikube with:
+
 - A \`Deployment\` managing 3 replicas
 - A \`Service\` exposing the app internally
 - An \`Ingress\` routing traffic via Nginx
@@ -115,24 +116,23 @@ K8s forces you to think declaratively. You describe what you *want*, not what to
 
 ## Where to start
 
-1. Install Minikube locally
-2. Deploy a simple app with \`kubectl apply -f deployment.yaml\`
-3. Break things intentionally and watch K8s self-heal
+1. Install Minikube locally.
+2. Deploy a simple app with \`kubectl apply -f deployment.yaml\`.
+3. Break things intentionally and watch K8s self-heal.
 
-The docs are dense but the \`kubectl explain\` command is your best friend.
-    `,
+The docs are dense but the \`kubectl explain\` command is your best friend.`,
   },
   {
     id: 4,
     slug: 'building-in-kenya',
     title: 'Building software products in Kenya — what nobody tells you',
-    excerpt: 'Payments, connectivity, hiring, and the unique constraints of shipping products for East African users. A developer\'s honest take.',
+    excerpt:
+      "Payments, connectivity, hiring, and the unique constraints of shipping products for East African users. A developer's honest take.",
     category: 'career',
-    reading_time: '7 min read',
-    created_at: '2025-12-05T08:00:00Z',
-    tags_list: ['kenya', 'africa', 'mpesa', 'career', 'product'],
-    content: `
-## The payment layer is different
+    readingTime: '7 min read',
+    createdAt: '2025-12-05',
+    tags: ['kenya', 'africa', 'mpesa', 'career', 'product'],
+    content: `## The payment layer is different
 
 M-Pesa is not a nice-to-have in Kenya — it's the default. Integrating Daraja (Safaricom's API) is your first real task on any consumer product. STK push, C2B, B2C — learn them all.
 
@@ -146,15 +146,16 @@ Contrary to what some think, Kenya has serious engineering talent. Nairobi's tec
 
 ## What I've learned
 
-- Build for the constraints of your actual users, not the users you imagine
-- M-Pesa callbacks are asynchronous — design for that from day one
-- Local community (communities like Nairobi Dev) is underrated for growth
+- Build for the constraints of your actual users, not the users you imagine.
+- M-Pesa callbacks are asynchronous — design for that from day one.
+- Local community (communities like Nairobi Dev) is underrated for growth.
 
 ## Final thought
 
-Building in Kenya is hard in specific ways and exciting in specific ways. The problems are real, the market is young, and the opportunity is genuine.
-    `,
+Building in Kenya is hard in specific ways and exciting in specific ways. The problems are real, the market is young, and the opportunity is genuine.`,
   },
 ]
+
+export const categories = ['all', 'mobile', 'backend', 'infrastructure', 'career']
 
 export default posts

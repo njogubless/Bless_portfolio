@@ -1,0 +1,181 @@
+.intro { padding-block: var(--space-8) var(--space-7); }
+
+.eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--color-ink-faint);
+  margin-bottom: var(--space-4);
+}
+
+.title { font-size: clamp(2.25rem, 6vw, 3.5rem); margin-bottom: var(--space-5); }
+.emphasis { font-style: italic; color: var(--color-accent); }
+.lead { max-width: 52ch; color: var(--color-ink-soft); font-size: 1.05rem; line-height: 1.8; }
+
+.block { padding-block: var(--space-7); border-top: 1px solid var(--color-border); }
+.blockLast { padding-block: var(--space-7) var(--space-9); border-top: 1px solid var(--color-border); }
+
+.expList { display: flex; flex-direction: column; gap: var(--space-4); }
+
+.expCard { padding: 0; overflow: hidden; }
+
+.expToggle {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-5);
+  display: block;
+}
+
+.expHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-3);
+}
+
+.expCompany { font-size: 1.15rem; margin-bottom: 3px; }
+.expRole { font-family: var(--font-mono); font-size: 12px; color: var(--color-accent); }
+
+.expMeta { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.expLocation { font-family: var(--font-mono); font-size: 11px; color: var(--color-ink-faint); }
+
+.expSummary {
+  color: var(--color-ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.75;
+  margin-bottom: var(--space-3);
+}
+
+.expDisclosure {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-accent);
+}
+
+.expBody {
+  padding: 0 var(--space-5) var(--space-5);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-4);
+  margin: 0 var(--space-5) var(--space-5);
+}
+
+.achievementList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: var(--space-4);
+}
+
+.achievementItem {
+  display: flex;
+  gap: 10px;
+  color: var(--color-ink-soft);
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+.achievementMark { color: var(--color-accent); flex-shrink: 0; }
+
+.expStack { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: var(--space-6);
+}
+
+.filterChip {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-raised);
+  color: var(--color-ink-soft);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.filterChip:hover { border-color: var(--color-border-strong); }
+
+.filterChipActive {
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+  color: var(--color-bg);
+}
+
+.projectGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 700px) {
+  .projectGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.projectCard { display: flex; flex-direction: column; height: 100%; }
+
+.projectHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.projectName { font-size: 1.05rem; margin-bottom: 2px; }
+.projectPeriod { font-family: var(--font-mono); font-size: 11px; color: var(--color-ink-faint); }
+
+.status {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--color-green-soft);
+  color: var(--color-green);
+  white-space: nowrap;
+}
+
+.statusPrivate { background: var(--color-accent-soft); color: var(--color-accent); }
+
+.projectDesc {
+  color: var(--color-ink-soft);
+  font-size: 0.875rem;
+  line-height: 1.75;
+  margin-bottom: var(--space-4);
+  flex: 1;
+}
+
+.projectStack {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: var(--space-4);
+}
+
+.projectLink {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-accent);
+  text-decoration: none;
+  align-self: flex-start;
+}
+.projectLink:hover { text-decoration: underline; }
+
+.projectPrivateNote {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-ink-faint);
+}

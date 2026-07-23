@@ -1,0 +1,67 @@
+.intro { padding-block: var(--space-8) var(--space-7); }
+
+.eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+  margin-bottom: var(--space-4);
+}
+
+.title { font-size: clamp(2.25rem, 6vw, 3.5rem); margin-bottom: var(--space-5); }
+.lead { max-width: 56ch; color: var(--color-ink-soft); font-size: 1.05rem; line-height: 1.8; }
+
+.block { padding-block: var(--space-7) var(--space-9); border-top: 1px solid var(--color-border); }
+
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: var(--space-6); text-transform: capitalize; }
+
+.filterChip {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-raised);
+  color: var(--color-ink-soft);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+.filterChip:hover { border-color: var(--color-border-strong); }
+.filterChipActive { background: var(--color-ink); border-color: var(--color-ink); color: var(--color-bg); }
+
+.postGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 700px) {
+  .postGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.postCard {
+  display: block;
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-raised);
+  text-decoration: none;
+  color: var(--color-ink);
+  transition: transform var(--duration-base) var(--ease-out), border-color var(--duration-base) var(--ease-out);
+}
+
+.postCard:hover { transform: translateY(-3px); border-color: var(--color-border-strong); }
+
+.postMeta { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3); text-transform: capitalize; }
+
+.postDate { font-family: var(--font-mono); font-size: 11px; color: var(--color-ink-faint); }
+
+.postTitle { font-size: 1.2rem; margin-bottom: var(--space-2); line-height: 1.35; }
+
+.postExcerpt { color: var(--color-ink-soft); font-size: 0.875rem; line-height: 1.7; margin-bottom: var(--space-3); }
+
+.postReadingTime { font-family: var(--font-mono); font-size: 11px; color: var(--color-ink-faint); }
+
+.empty { color: var(--color-ink-faint); font-family: var(--font-mono); font-size: 13px; padding-block: var(--space-6); }

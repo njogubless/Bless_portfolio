@@ -2,11 +2,51 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Bricolage+Grotesque:wght@300;500;700;800&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#F7F3EA" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#12141A" media="(prefers-color-scheme: dark)" />
+
+    <title>Paul Njogu — Flutter &amp; Python Developer</title>
+    <meta name="description" content="Paul Njogu is a full-stack Flutter and Python developer in Nairobi, Kenya, building mobile apps, REST APIs, and cloud infrastructure that ships to production." />
+    <meta name="author" content="Paul Njogu" />
+    <link rel="canonical" href="https://paulnjogu.com/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Paul Njogu — Flutter & Python Developer" />
+    <meta property="og:description" content="Full-stack developer building mobile apps, REST APIs and cloud infrastructure that ships. Based in Nairobi, Kenya." />
+    <meta property="og:image" content="/og-cover.png" />
+    <meta property="og:url" content="https://paulnjogu.com/" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Paul Njogu — Flutter & Python Developer" />
+    <meta name="twitter:description" content="Full-stack developer building mobile apps, REST APIs and cloud infrastructure that ships." />
+    <meta name="twitter:image" content="/og-cover.png" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Preconnect to font origins for faster first paint -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Theme is applied before paint to avoid a flash of the wrong theme -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

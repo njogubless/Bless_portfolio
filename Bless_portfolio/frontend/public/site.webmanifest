@@ -1,0 +1,9 @@
+{
+  "name": "Paul Njogu — Flutter & Python Developer",
+  "short_name": "Paul Njogu",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }],
+  "theme_color": "#F7F3EA",
+  "background_color": "#F7F3EA",
+  "display": "standalone",
+  "start_url": "/"
+}

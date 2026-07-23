@@ -1,0 +1,100 @@
+.wrap { padding-block: var(--space-8) var(--space-9); }
+
+.back {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-ink-faint);
+  text-decoration: none;
+  margin-bottom: var(--space-6);
+}
+.back:hover { color: var(--color-accent); }
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+  text-transform: capitalize;
+}
+
+.date, .readingTime { font-family: var(--font-mono); font-size: 12px; color: var(--color-ink-faint); }
+.dot { color: var(--color-ink-faint); }
+
+.title { font-size: clamp(2rem, 5vw, 2.75rem); margin-bottom: var(--space-4); line-height: 1.2; }
+
+.excerpt { color: var(--color-ink-soft); font-size: 1.05rem; line-height: 1.75; margin-bottom: var(--space-5); }
+
+.tags { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: var(--space-8); padding-bottom: var(--space-6); border-bottom: 1px solid var(--color-border); }
+
+.content {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: var(--color-ink);
+}
+
+.content :global(h2) {
+  font-size: 1.4rem;
+  margin-top: var(--space-7);
+  margin-bottom: var(--space-3);
+}
+
+.content :global(p) { margin-bottom: var(--space-4); color: var(--color-ink-soft); }
+
+.content :global(ul), .content :global(ol) {
+  margin-bottom: var(--space-4);
+  padding-left: 1.25em;
+  color: var(--color-ink-soft);
+}
+
+.content :global(li) { margin-bottom: 8px; }
+
+.content :global(code) {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--color-bg-inset);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.content :global(pre) {
+  background: var(--color-ink);
+  color: var(--color-bg);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  margin-bottom: var(--space-5);
+}
+
+.content :global(pre code) {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+.content :global(strong) { color: var(--color-ink); }
+
+.nextWrap {
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+
+.nextLabel {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+  margin-bottom: var(--space-2);
+}
+
+.nextLink {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+.nextLink:hover { color: var(--color-accent); }

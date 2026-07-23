@@ -1,194 +1,60 @@
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, Link, Navigate } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
-import posts from '../data/posts'
+import SEO from '../components/SEO'
+import Container from '../components/ui/Container'
+import Reveal from '../components/ui/Reveal'
+import Badge from '../components/ui/Badge'
+import { formatDate } from '../lib/utils'
+import posts from '../lib/data/posts'
+import styles from './BlogPost.module.css'
 
-const categoryColors = {
-  mobile:         { bg: 'rgba(167,139,250,0.1)',  border: 'rgba(167,139,250,0.25)', text: '#c4b5fd' },
-  backend:        { bg: 'rgba(52,211,153,0.08)',  border: 'rgba(52,211,153,0.2)',   text: '#6ee7b7' },
-  infrastructure: { bg: 'rgba(251,191,36,0.08)',  border: 'rgba(251,191,36,0.18)', text: '#fbbf24' },
-  frontend:       { bg: 'rgba(96,165,250,0.08)',  border: 'rgba(96,165,250,0.2)',   text: '#93c5fd' },
-  career:         { bg: 'rgba(244,114,182,0.08)', border: 'rgba(244,114,182,0.2)', text: '#f9a8d4' },
-}
+export default function BlogPost() {
+  const { slug } = useParams()
+  const post = posts.find((p) => p.slug === slug)
 
-function BlogPost() {
-  const { slug }  = useParams()
-  const navigate  = useNavigate()
+  // Redirect to a real 404 instead of rendering a blank page for a bad
+  // or stale slug (e.g. an old bookmark, or a typo in a shared link).
+  if (!post) return <Navigate to="/blog" replace />
 
-  const post = posts.find(p => p.slug === slug)
-
-  if (!post) return (
-    <div style={{
-      padding: '3rem 2rem', maxWidth: '720px', margin: '0 auto',
-      fontFamily: 'JetBrains Mono', fontSize: '12px',
-      color: '#f87171', display: 'flex', flexDirection: 'column', gap: '12px',
-    }}>
-      <span>error: post not found</span>
-      <button
-        onClick={() => navigate('/blog')}
-        style={{
-          width: 'fit-content', fontFamily: 'JetBrains Mono', fontSize: '11px',
-          padding: '8px 16px', borderRadius: '6px', cursor: 'pointer',
-          background: 'rgba(167,139,250,0.1)',
-          border: '1px solid rgba(167,139,250,0.3)',
-          color: '#c4b5fd',
-        }}
-      >
-        {'<-'} back to blog
-      </button>
-    </div>
-  )
-
-  const c = categoryColors[post.category] || categoryColors.backend
-  const date = new Date(post.created_at).toLocaleDateString('en-KE', {
-    year: 'numeric', month: 'long', day: 'numeric',
-  })
+  const index = posts.findIndex((p) => p.slug === slug)
+  const next = posts[(index + 1) % posts.length]
 
   return (
-    <div style={{
-      position: 'relative', zIndex: 5,
-      padding: '3rem 2rem', maxWidth: '720px', margin: '0 auto',
-    }}>
+    <>
+      <SEO path={`/blog/${post.slug}`} title={post.title} description={post.excerpt} />
 
-      {/* Back button */}
-      <button
-        onClick={() => navigate('/blog')}
-        style={{
-          fontFamily: 'JetBrains Mono', fontSize: '11px',
-          display: 'flex', alignItems: 'center', gap: '6px',
-          background: 'none', border: 'none', cursor: 'pointer',
-          color: 'rgba(226,223,245,0.4)', marginBottom: '2rem',
-          padding: 0, letterSpacing: '0.05em', transition: 'color 0.2s',
-        }}
-        onMouseOver={e => e.currentTarget.style.color = '#a78bfa'}
-        onMouseOut={e => e.currentTarget.style.color = 'rgba(226,223,245,0.4)'}
-      >
-        {'<-'} back to blog
-      </button>
+      <Container as="article" narrow className={styles.wrap}>
+        <Reveal>
+          <Link to="/blog" className={styles.back}>← All posts</Link>
 
-      {/* Category + meta */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '1.25rem', flexWrap: 'wrap' }}>
-        <span style={{
-          fontFamily: 'JetBrains Mono', fontSize: '10px',
-          padding: '3px 10px', borderRadius: '6px',
-          background: c.bg, border: '1px solid ' + c.border, color: c.text,
-        }}>
-          {post.category}
-        </span>
-        <span style={{ fontFamily: 'JetBrains Mono', fontSize: '10px', color: 'rgba(226,223,245,0.3)' }}>
-          {post.reading_time}
-        </span>
-        <span style={{ fontFamily: 'JetBrains Mono', fontSize: '10px', color: 'rgba(226,223,245,0.25)' }}>
-          {date}
-        </span>
-      </div>
+          <div className={styles.meta}>
+            <Badge tone="accent">{post.category}</Badge>
+            <span className={styles.date}>{formatDate(post.createdAt)}</span>
+            <span className={styles.dot} aria-hidden="true">·</span>
+            <span className={styles.readingTime}>{post.readingTime}</span>
+          </div>
 
-      {/* Title */}
-      <h1 style={{
-        fontFamily: 'Bricolage Grotesque',
-        fontSize: 'clamp(1.8rem, 5vw, 2.8rem)',
-        fontWeight: 800, color: '#e2dff5',
-        lineHeight: 1.2, letterSpacing: '-0.02em', marginBottom: '1rem',
-      }}>
-        {post.title}
-      </h1>
+          <h1 className={styles.title}>{post.title}</h1>
+          <p className={styles.excerpt}>{post.excerpt}</p>
 
-      {/* Excerpt */}
-      <p style={{
-        fontFamily: 'JetBrains Mono', fontSize: '13px',
-        color: 'rgba(226,223,245,0.5)', lineHeight: 1.9,
-        marginBottom: '2rem', paddingBottom: '2rem',
-        borderBottom: '1px solid rgba(255,255,255,0.07)',
-      }}>
-        {post.excerpt}
-      </p>
+          <ul className={styles.tags}>
+            {post.tags.map((tag) => (
+              <li key={tag}><Badge>{tag}</Badge></li>
+            ))}
+          </ul>
+        </Reveal>
 
-      {/* Tags */}
-      {post.tags_list && post.tags_list.length > 0 && (
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '2.5rem' }}>
-          {post.tags_list.map(tag => (
-            <span key={tag} style={{
-              fontFamily: 'JetBrains Mono', fontSize: '10px',
-              padding: '3px 10px', borderRadius: '6px',
-              background: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.08)',
-              color: 'rgba(226,223,245,0.4)',
-            }}>
-              #{tag}
-            </span>
-          ))}
-        </div>
-      )}
-
-      {/* Markdown content */}
-      <div>
-        <style>{`
-          .blog-content h1, .blog-content h2, .blog-content h3 {
-            font-family: 'Bricolage Grotesque', sans-serif;
-            color: #e2dff5; font-weight: 700;
-            margin: 2rem 0 1rem; line-height: 1.3;
-          }
-          .blog-content h1 { font-size: 1.8rem; }
-          .blog-content h2 { font-size: 1.4rem; color: rgba(226,223,245,0.9); }
-          .blog-content h3 { font-size: 1.1rem; color: rgba(226,223,245,0.8); }
-          .blog-content p {
-            font-family: 'JetBrains Mono', monospace; font-size: 13px;
-            color: rgba(226,223,245,0.65); line-height: 2; margin-bottom: 1.25rem;
-          }
-          .blog-content code {
-            font-family: 'JetBrains Mono', monospace; font-size: 12px;
-            background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.2);
-            color: #c4b5fd; padding: 2px 6px; border-radius: 4px;
-          }
-          .blog-content pre {
-            background: rgba(10,8,25,0.8); border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 10px; padding: 1.25rem; overflow-x: auto; margin: 1.5rem 0;
-          }
-          .blog-content pre code {
-            background: none; border: none; padding: 0; font-size: 12px; color: #34d399;
-          }
-          .blog-content ul, .blog-content ol { padding-left: 1.5rem; margin-bottom: 1.25rem; }
-          .blog-content li {
-            font-family: 'JetBrains Mono', monospace; font-size: 13px;
-            color: rgba(226,223,245,0.65); line-height: 2;
-          }
-          .blog-content blockquote {
-            border-left: 3px solid #a78bfa; padding: 0.5rem 0 0.5rem 1.25rem;
-            margin: 1.5rem 0; background: rgba(167,139,250,0.05); border-radius: 0 8px 8px 0;
-          }
-          .blog-content blockquote p { color: rgba(226,223,245,0.5); font-style: italic; margin: 0; }
-          .blog-content a { color: #a78bfa; text-decoration: none; border-bottom: 1px solid rgba(167,139,250,0.3); }
-          .blog-content hr { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 2rem 0; }
-          .blog-content strong { color: #e2dff5; font-weight: 500; }
-        `}</style>
-        <div className="blog-content">
+        <Reveal className={styles.content}>
           <ReactMarkdown>{post.content}</ReactMarkdown>
-        </div>
-      </div>
+        </Reveal>
 
-      {/* Bottom nav */}
-      <div style={{
-        marginTop: '4rem', paddingTop: '2rem',
-        borderTop: '1px solid rgba(255,255,255,0.07)',
-        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        flexWrap: 'wrap', gap: '12px',
-      }}>
-        <button
-          onClick={() => navigate('/blog')}
-          style={{
-            fontFamily: 'JetBrains Mono', fontSize: '11px',
-            padding: '10px 20px', borderRadius: '8px', cursor: 'pointer',
-            background: 'rgba(167,139,250,0.1)',
-            border: '1px solid rgba(167,139,250,0.25)', color: '#c4b5fd',
-          }}
-        >
-          {'<-'} all posts
-        </button>
-        <div style={{ fontFamily: 'JetBrains Mono', fontSize: '10px', color: 'rgba(226,223,245,0.2)' }}>
-          paul njogu · {date}
-        </div>
-      </div>
-    </div>
+        <Reveal className={styles.nextWrap}>
+          <span className={styles.nextLabel}>Next up</span>
+          <Link to={`/blog/${next.slug}`} className={styles.nextLink}>
+            {next.title} →
+          </Link>
+        </Reveal>
+      </Container>
+    </>
   )
 }
-
-export default BlogPost
