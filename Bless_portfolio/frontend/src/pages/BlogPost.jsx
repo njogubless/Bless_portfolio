@@ -45,9 +45,15 @@ export default function BlogPost() {
           </ul>
         </Reveal>
 
-        <Reveal className={styles.content}>
+        {/* Not wrapped in <Reveal>: that component hides its children until
+            they scroll into view, and this block sits far enough down the
+            page (below the title/excerpt/tags) that it started off-screen —
+            so the post looked empty until the reader scrolled. This is the
+            content someone opened the page for; it should never be hidden
+            on first paint. */}
+        <div className={styles.content}>
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
-        </Reveal>
+        </div>
 
         <Reveal className={styles.nextWrap}>
           <span className={styles.nextLabel}>Next up</span>
