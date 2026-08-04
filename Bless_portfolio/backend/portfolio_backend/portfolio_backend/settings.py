@@ -10,20 +10,52 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 import os
+from datetime import timedelta
 from pathlib import Path
 
+from django.core.exceptions import ImproperlyConfigured
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Loads backend/portfolio_backend/.env for local development. In CI and in
+# production (Render) the real environment variables are set directly by the
+# platform and take precedence — load_dotenv() never overwrites a variable
+# that's already set.
+load_dotenv(BASE_DIR / '.env')
 
 
-SECRET_KEY = 'django-insecure-1xe33756fy-xwea79yutf0-aa_2eu##u-=plpeia44ed1u7(t0'
+def _env_bool(name, default=False):
+    return os.environ.get(name, str(default)).strip().lower() in ('1', 'true', 'yes', 'on')
 
 
-DEBUG = False
+def _env_list(name):
+    raw = os.environ.get(name, '')
+    return [item.strip() for item in raw.split(',') if item.strip()]
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.onrender.com',]
 
+DEBUG = _env_bool('DEBUG', False)
+
+SECRET_KEY = os.environ.get('SECRET_KEY')
+if not SECRET_KEY:
+    if DEBUG:
+        # Fine for a throwaway local database; never used when DEBUG=False.
+        SECRET_KEY = 'django-insecure-local-development-key-do-not-deploy'
+    else:
+        raise ImproperlyConfigured(
+            'SECRET_KEY environment variable must be set when DEBUG=False. '
+            'Generate one with `python -c "from django.core.management.utils '
+            'import get_random_secret_key; print(get_random_secret_key())"` '
+            'and set it as a real environment variable — never hardcode it.'
+        )
+
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '.onrender.com',
+    'api.paulnjogu.com',
+    'paulnjogu.com',
+] + _env_list('ALLOWED_HOSTS')
 
 
 INSTALLED_APPS = [
@@ -34,6 +66,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     'api',
 ]
@@ -48,9 +81,17 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-   
 ]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Django 4.2+ storage API (replaces the old STATICFILES_STORAGE setting).
+STORAGES = {
+    'default': {
+        'BACKEND': 'django.core.files.storage.FileSystemStorage',
+    },
+    'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+    },
+}
 
 ROOT_URLCONF = 'portfolio_backend.urls'
 
@@ -72,8 +113,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'portfolio_backend.wsgi.application'
 
 
-
-
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
 if DATABASE_URL:
@@ -88,7 +127,6 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -107,8 +145,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -118,28 +154,39 @@ USE_I18N = True
 USE_TZ = True
 
 
-
-
 STATIC_URL = 'static/'
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
     'http://127.0.0.1:5173',
+    'https://paulnjogu.com',
+    'https://www.paulnjogu.com',
     'https://bless-portfolio-nine.vercel.app',
-    'https://bless-portfolio-kt124l910-njogubless-projects.vercel.app'
-]
+    'https://bless-portfolio-kt124l910-njogubless-projects.vercel.app',
+] + _env_list('CORS_ALLOWED_ORIGINS')
 
 # This covers ALL current and future Vercel preview URLs automatically
 CORS_ALLOWED_ORIGIN_REGEXES = [
     r"^https://.*\.vercel\.app$",
 ]
 
-from datetime import timedelta
+CSRF_TRUSTED_ORIGINS = [
+    'https://api.paulnjogu.com',
+    'https://*.onrender.com',
+] + _env_list('CSRF_TRUSTED_ORIGINS')
+
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+    # Refresh tokens rotate on use and the old one is blacklisted, so a
+    # stolen refresh token has a much smaller window of usefulness.
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
 REST_FRAMEWORK = {
@@ -149,12 +196,69 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ],
+    # Scoped throttles are opted into per-view via `throttle_scope`; this
+    # just defines the rate for the 'contact' scope used by the public
+    # contact form so it can't be used as a spam cannon.
+    'DEFAULT_THROTTLE_RATES': {
+        'contact': '5/hour',
+    },
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'njogubless2@gmail.com'
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-DEFAULT_FROM_EMAIL = 'njogubless2@gmail.com'
+EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT', '587'))
+EMAIL_USE_TLS = _env_bool('EMAIL_USE_TLS', True)
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', EMAIL_HOST_USER)
+# Where contact-form notifications land; defaults to the sending address.
+CONTACT_NOTIFICATION_EMAIL = os.environ.get('CONTACT_NOTIFICATION_EMAIL', DEFAULT_FROM_EMAIL)
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {name} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': os.environ.get('DJANGO_LOG_LEVEL', 'INFO'),
+    },
+}
+
+# --- Production security hardening -----------------------------------------
+# Kept off when DEBUG is True so local dev and CI (which also runs with
+# DEBUG=False, see .github/workflows/backend.yml) aren't affected by things
+# that redirect or reject plain-HTTP requests.
+if not DEBUG:
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_REFERRER_POLICY = 'same-origin'
+    X_FRAME_OPTIONS = 'DENY'
+
+    # Render/Cloudflare terminate TLS and forward this header; without it
+    # Django can't tell the request was actually HTTPS.
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+    # HSTS is opt-in via env var rather than always-on: it's a browser-cached
+    # commitment that's awkward to walk back, and Cloudflare already forces
+    # HTTPS at the edge per the README's deployment table. Enable once
+    # you've confirmed the forwarded-proto header behaves as expected.
+    SECURE_HSTS_SECONDS = int(os.environ.get('SECURE_HSTS_SECONDS', '0'))
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = _env_bool('SECURE_HSTS_INCLUDE_SUBDOMAINS', False)
+    SECURE_HSTS_PRELOAD = _env_bool('SECURE_HSTS_PRELOAD', False)
+
+    # Same reasoning: the edge (Cloudflare/Render) already redirects to
+    # HTTPS. Only turn this on if you've verified there's no double-redirect
+    # or redirect-loop with your proxy setup.
+    SECURE_SSL_REDIRECT = _env_bool('SECURE_SSL_REDIRECT', False)
