@@ -21,6 +21,7 @@ const projects = [
     stack: ['Flutter', 'Dart', 'Riverpod', 'FastAPI', 'PostgreSQL', 'Docker', 'M-Pesa Daraja', 'Airtel Money API'],
     github: 'https://github.com/njogubless/changa',
     status: 'in-production',
+    writeup: { slug: 'changa-engineering-log', label: 'Read the engineering log' },
   },
   {
     id: 'marketplace',

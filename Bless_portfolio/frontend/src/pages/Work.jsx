@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
 import SEO from '../components/SEO'
 import Container from '../components/ui/Container'
 import Reveal from '../components/ui/Reveal'
@@ -83,13 +84,20 @@ function ProjectEntry({ project }) {
           <li key={s}><Badge>{s}</Badge></li>
         ))}
       </ul>
-      {project.github ? (
-        <a href={project.github} target="_blank" rel="noopener noreferrer" className={styles.projectLink}>
-          View on GitHub ↗
-        </a>
-      ) : (
-        <span className={styles.projectPrivateNote}>Codebase is private</span>
-      )}
+      <div className={styles.projectLinks}>
+        {project.github ? (
+          <a href={project.github} target="_blank" rel="noopener noreferrer" className={styles.projectLink}>
+            View on GitHub ↗
+          </a>
+        ) : (
+          <span className={styles.projectPrivateNote}>Codebase is private</span>
+        )}
+        {project.writeup && (
+          <Link to={`/blog/${project.writeup.slug}`} className={styles.projectLink}>
+            {project.writeup.label} →
+          </Link>
+        )}
+      </div>
     </Card>
   )
 }
