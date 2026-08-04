@@ -22,9 +22,12 @@ class Message(models.Model):
     subject    = models.CharField(max_length=200)
     body       = models.TextField()
     sent_at    = models.DateTimeField(auto_now_add=True)
-    is_read    = models.BooleanField(default=False)  
+    is_read    = models.BooleanField(default=False)
     class Meta:
-        ordering = ['-sent_at']  
+        ordering = ['-sent_at']
+        indexes = [
+            models.Index(fields=['is_read']),
+        ]
 
     def __str__(self):
         return f"{self.name} — {self.subject}"
@@ -52,6 +55,10 @@ class BlogPost(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+        indexes = [
+            models.Index(fields=['category']),
+            models.Index(fields=['published']),
+        ]
 
     def __str__(self):
         return self.title
