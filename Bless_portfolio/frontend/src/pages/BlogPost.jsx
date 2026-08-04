@@ -1,5 +1,6 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import SEO from '../components/SEO'
 import Container from '../components/ui/Container'
 import Reveal from '../components/ui/Reveal'
@@ -45,7 +46,7 @@ export default function BlogPost() {
         </Reveal>
 
         <Reveal className={styles.content}>
-          <ReactMarkdown>{post.content}</ReactMarkdown>
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
         </Reveal>
 
         <Reveal className={styles.nextWrap}>
