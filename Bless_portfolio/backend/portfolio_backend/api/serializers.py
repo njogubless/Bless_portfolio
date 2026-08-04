@@ -8,6 +8,7 @@ class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model  = Project
         fields = ['id', 'name', 'tech', 'description', 'github_url', 'icon', 'color', 'order', 'created_at']
+        read_only_fields = ['id', 'created_at']
 
 
 
@@ -15,6 +16,7 @@ class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model  = Message
         fields = ['id', 'name', 'email', 'subject', 'body', 'sent_at']
+        read_only_fields = ['id', 'sent_at']
 
 
 class BlogPostListSerializer(serializers.ModelSerializer):
