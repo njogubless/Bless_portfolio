@@ -11,7 +11,8 @@ const profile = {
   locationShort: 'Nairobi / Remote',
   available: true,
   email: 'njogupaul994@gmail.com',
-  resumeUrl: 'https://drive.google.com/file/d/1KjQzatlHPCOa0ZNacwFtbJ06ZwF5XIzx/view?usp=sharing',
+  //resumeUrl: 'https://drive.google.com/file/d/1KjQzatlHPCOa0ZNacwFtbJ06ZwF5XIzx/view?usp=sharing',
+  resumeUrl:'https://drive.google.com/file/d/12F98YWck0ZVNNBUcw58yl1jJYcKQ9n_P/view?usp=sharing',
   socials: [
     { label: 'GitHub', handle: '@njogubless', url: 'https://github.com/njogubless' },
     { label: 'LinkedIn', handle: 'paul-njogu', url: 'https://www.linkedin.com/in/paul-njogu-02b413214/' },
