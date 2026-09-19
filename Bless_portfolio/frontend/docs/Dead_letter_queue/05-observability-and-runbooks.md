@@ -1,3 +1,16 @@
+---
+slug: dlq-observability-runbooks
+title: "Observability: Metrics, Fingerprints, and Runbooks"
+excerpt: >-
+  A dead letter queue nobody looks at is just a slower way of dropping the
+  message. What to measure, how to fingerprint thousands of failures into one
+  incident, and the triage runbook an on-call engineer follows at 3am.
+category: infrastructure
+date: 2026-07-03
+tags: [observability, distributed-systems, monitoring]
+series: hardening-the-reconciliation-worker
+part: 5
+---
 # Part 5 — Observability: Metrics, Fingerprints, and Runbooks
 
 *Hardening the Reconciliation Worker, Part 5 of 7*

@@ -1,3 +1,16 @@
+---
+slug: changa-schema-truth
+title: "Schema truth: why we deleted create_tables()"
+excerpt: >-
+  Deleting one line of SQLAlchemy convenience code and making Alembic the only
+  thing allowed to touch the schema — after two rolling-deploy replicas raced
+  to create the same table.
+category: backend
+date: 2026-03-15
+tags: [changa, fastapi, postgresql, alembic, migrations]
+series: changa-engineering-log
+part: 1
+---
 # Schema truth: why we deleted `create_tables()`
 
 Every time the Changa API started up, it ran one line: `Base.metadata.create_all(bind=engine)`. Read the tables your Python code defines, and create any that don't exist yet in the database. It's the first thing almost every SQLAlchemy tutorial shows you, and it feels harmless — it only *adds* things, right?

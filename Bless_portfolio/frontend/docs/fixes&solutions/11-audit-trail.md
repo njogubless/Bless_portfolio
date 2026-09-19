@@ -1,3 +1,16 @@
+---
+slug: changa-audit-trail
+title: "The history that matters is the history you didn't record"
+excerpt: >-
+  Three functions quietly overwrote data with no record of who changed what or
+  when. Hooking into a database event to make an audit trail nobody has to
+  remember to write.
+category: backend
+date: 2026-05-04
+tags: [changa, audit, postgresql, sqlalchemy]
+series: changa-engineering-log
+part: 11
+---
 # The history that matters is the history you didn't record
 
 `update_project` and `update_chama` both worked the same simple way: loop over whatever fields the request sent, and `setattr` each one onto the database row. `remove_member` hard-deletes the row the moment someone is removed from a chama. `regenerate_invite_code` overwrites the old code in place. All perfectly functional — and all of them leave zero trace of *who* did it, *when*, or *what the value was before*.

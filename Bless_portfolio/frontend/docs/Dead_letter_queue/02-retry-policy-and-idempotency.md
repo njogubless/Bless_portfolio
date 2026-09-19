@@ -1,3 +1,16 @@
+---
+slug: dlq-retry-policy-idempotency
+title: "Retry Policy: Backoff, Budgets, and Idempotency"
+excerpt: >-
+  A retry you can't afford to run twice is a bug, not a retry. Idempotency,
+  exponential backoff with jitter, circuit breakers, and the
+  visibility-timeout bug that produces "impossible" duplicate processing.
+category: infrastructure
+date: 2026-06-12
+tags: [distributed-systems, celery, retries, idempotency]
+series: hardening-the-reconciliation-worker
+part: 2
+---
 # Part 2 — Retry Policy: Backoff, Budgets, and Idempotency
 
 *Hardening the Reconciliation Worker, Part 2 of 7*

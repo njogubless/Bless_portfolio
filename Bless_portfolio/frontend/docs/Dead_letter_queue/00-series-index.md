@@ -1,3 +1,16 @@
+---
+slug: hardening-the-reconciliation-worker
+title: "Hardening the Reconciliation Worker"
+excerpt: >-
+  A seven-part series on retries, dead letter queues, and failure handling in
+  a multi-tenant SaaS reconciliation worker — from delivery semantics to the
+  category error that turns an unmatched transaction into a permanently lost
+  one.
+category: infrastructure
+date: 2026-07-18
+tags: [distributed-systems, celery, dead-letter-queue, reconciliation, series-index]
+series: hardening-the-reconciliation-worker
+---
 # Hardening the Reconciliation Worker
 
 ### A seven-part series on retries, dead letter queues, and failure handling in a multi-tenant SaaS

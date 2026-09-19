@@ -1,3 +1,16 @@
+---
+slug: dlq-replay-repair-schema-evolution
+title: "Replay, Repair, and Schema Evolution"
+excerpt: >-
+  Replay is where a DLQ either earns its existence or reveals itself as an
+  expensive log table. Dry runs, rate-limited execution, and the upcasters
+  that let you safely replay a message from six months ago.
+category: infrastructure
+date: 2026-07-10
+tags: [distributed-systems, postgresql, schema-evolution]
+series: hardening-the-reconciliation-worker
+part: 6
+---
 # Part 6 — Replay, Repair, and Schema Evolution
 
 *Hardening the Reconciliation Worker, Part 6 of 7*

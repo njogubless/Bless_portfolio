@@ -1,3 +1,15 @@
+---
+slug: changa-authenticating-payment-callbacks
+title: "Never trust a webhook: authenticating payment callbacks"
+excerpt: >-
+  A public webhook URL isn't a credential. Hardening Changa's M-Pesa callback
+  endpoint against anyone who finds — or guesses — it.
+category: backend
+date: 2026-03-29
+tags: [changa, security, webhooks, mpesa]
+series: changa-engineering-log
+part: 4
+---
 # Never trust a webhook: authenticating payment callbacks
 
 When a member pays into a project over M-Pesa, Safaricom's systems eventually call back to Changa's server with the result: success or failure, and (sometimes) an amount and a receipt number. Changa's original callback endpoint, `/payments/mpesa/callback`, looked at that request body, and if it said the payment succeeded, marked the contribution as paid.

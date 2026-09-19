@@ -1,3 +1,16 @@
+---
+slug: dlq-multi-tenancy-isolation-fairness
+title: "Multi-Tenancy: Isolation, Fairness, and Blast Radius"
+excerpt: >-
+  In a shared worker pool, one tenant's failure is every other tenant's
+  latency. Sharded queues, tenant quarantine, and the replay bug that turns
+  ambient context into a cross-tenant data breach.
+category: infrastructure
+date: 2026-06-26
+tags: [multi-tenancy, distributed-systems, postgresql, celery]
+series: hardening-the-reconciliation-worker
+part: 4
+---
 # Part 4 — Multi-Tenancy: Isolation, Fairness, and Blast Radius
 
 *Hardening the Reconciliation Worker, Part 4 of 7*

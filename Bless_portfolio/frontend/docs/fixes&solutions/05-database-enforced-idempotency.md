@@ -1,3 +1,16 @@
+---
+slug: changa-database-enforced-idempotency
+title: "Two requests, one truth: idempotency in the database"
+excerpt: >-
+  Two near-simultaneous requests, one contribution, no guarantee only one
+  wins. Pushing idempotency out of application code and into database
+  constraints.
+category: backend
+date: 2026-04-03
+tags: [changa, postgresql, idempotency, alembic]
+series: changa-engineering-log
+part: 5
+---
 # Two requests, one truth: idempotency in the database
 
 "Idempotent" is one of those words that sounds academic until the exact moment your phone loses signal mid-payment. You tap "contribute," the request goes out, the connection drops before you see a response, and — reasonably — you tap it again. Or the payment provider's own callback delivery retries because it didn't get an acknowledgment fast enough. Either way, the same successful payment can now arrive at your server described twice.

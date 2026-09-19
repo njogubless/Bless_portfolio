@@ -1,3 +1,16 @@
+---
+slug: changa-refresh-token-security
+title: "A refresh token is a password with extra steps"
+excerpt: >-
+  Changa stored refresh tokens as plaintext JWTs — the same as storing a
+  password in the clear. Rotation families, opaque tokens, and revocation that
+  actually revokes.
+category: backend
+date: 2026-04-14
+tags: [changa, security, jwt, fastapi]
+series: changa-engineering-log
+part: 7
+---
 # A refresh token is a password with extra steps
 
 A refresh token is what lets someone stay logged in without re-entering their password every fifteen minutes. Functionally, it *is* a password — anyone who has it can use it to get a fresh access token and act as that user. Changa's original schema stored it like this:

@@ -1,3 +1,16 @@
+---
+slug: changa-observability-from-zero
+title: "Nobody could answer \"what happened to this shilling\""
+excerpt: >-
+  There wasn't a single log line anywhere in Changa's backend. Structured
+  logs, request correlation, and a ready endpoint that actually checks the
+  database.
+category: backend
+date: 2026-04-24
+tags: [changa, observability, logging, fastapi]
+series: changa-engineering-log
+part: 9
+---
 # Nobody could answer "what happened to this shilling"
 
 There wasn't a single `logging.getLogger()` call anywhere in Changa's backend. Sentry — an error-tracking service — was listed as a dependency, but `sentry_sdk.init()` was never actually called, so it did nothing at all. The only output the server produced was Uvicorn's default access log: a line per request, with no way to connect a specific user's failed contribution to the specific provider call and callback that were involved in it. And `/health` returned a static `{"status": "ok"}` no matter what — even with the database completely unreachable, which means an orchestrator checking that endpoint would happily keep sending traffic to a pod that couldn't actually do anything.

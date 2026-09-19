@@ -1,3 +1,16 @@
+---
+slug: changa-money-as-decimal
+title: "The missing cent: money as Decimal, not float"
+excerpt: >-
+  0.1 + 0.2 isn't 0.3 — and when your ledger has to match a mobile money
+  provider to the cent, that rounding error is the whole bug. Why Changa moved
+  every monetary column to Decimal.
+category: backend
+date: 2026-03-19
+tags: [changa, postgresql, python, fintech, mpesa]
+series: changa-engineering-log
+part: 2
+---
 # The missing cent: money as `Decimal`, not `float`
 
 Here's a small experiment you can run in almost any programming language:

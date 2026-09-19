@@ -1,3 +1,16 @@
+---
+slug: changa-rate-limiting-without-redis
+title: "Stopping a brute force without adding Redis"
+excerpt: >-
+  Every endpoint accepted unlimited requests — including a real, billed STK
+  push to Safaricom. A rate limiter and a lockout policy, built without
+  reaching for Redis.
+category: backend
+date: 2026-04-19
+tags: [changa, security, rate-limiting, python]
+series: changa-engineering-log
+part: 8
+---
 # Stopping a brute force without adding Redis
 
 The only middleware registered anywhere in Changa's API was CORS. That meant every endpoint accepted unlimited requests from anyone: unlimited login attempts against a single account, unlimited free-form account registrations, and — the one with a real dollar cost attached — unlimited real STK pushes triggered through the payment-initiation endpoint. Each one of those is a genuine, billed request to Safaricom. A script hammering that endpoint isn't just an inconvenience; it's a phone bill, and enough of it will get the platform's shortcode suspended by the provider entirely.

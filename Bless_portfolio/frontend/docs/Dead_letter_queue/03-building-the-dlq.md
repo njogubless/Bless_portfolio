@@ -1,3 +1,16 @@
+---
+slug: dlq-building-the-dead-letter-queue
+title: "Building the Dead Letter Queue"
+excerpt: >-
+  A dead letter queue is a work queue for humans, not an error log.
+  Broker-native dead lettering versus an application-level table, and the
+  envelope design that makes replay possible six months later.
+category: infrastructure
+date: 2026-06-19
+tags: [distributed-systems, postgresql, celery, dead-letter-queue]
+series: hardening-the-reconciliation-worker
+part: 3
+---
 # Part 3 — Building the Dead Letter Queue
 
 *Hardening the Reconciliation Worker, Part 3 of 7*

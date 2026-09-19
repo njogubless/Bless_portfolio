@@ -1,3 +1,16 @@
+---
+slug: changa-api-contract-drift
+title: "When the app and the server quietly stop agreeing"
+excerpt: >-
+  The Flutter app called an endpoint the server didn't define — and got a 422
+  instead of a clean 404, disguising a dead route as a validation error for
+  months.
+category: backend
+date: 2026-04-29
+tags: [changa, api-design, fastapi, flutter]
+series: changa-engineering-log
+part: 10
+---
 # When the app and the server quietly stop agreeing
 
 The Flutter app's main project-browsing screen called `GET /projects`. The server didn't define that route. It never had — creating and listing projects had been moved, at some earlier point, to live under `/chamas/{chama_id}/projects` instead, and nobody had gone back to update the client.

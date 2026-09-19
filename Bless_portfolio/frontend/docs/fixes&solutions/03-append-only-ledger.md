@@ -1,3 +1,16 @@
+---
+slug: changa-append-only-ledger
+title: "Add should never mean add twice: the append-only ledger"
+excerpt: >-
+  raised_amount += contribution.amount looks harmless until a retried callback
+  runs it twice. Building an append-only ledger where crediting a project can
+  only ever happen once.
+category: backend
+date: 2026-03-24
+tags: [changa, postgresql, ledger, concurrency]
+series: changa-engineering-log
+part: 3
+---
 # Add should never mean add twice: the append-only ledger
 
 Picture the simplest possible way to record a contribution: when a payment succeeds, run `project.raised_amount += contribution.amount` and save. It reads perfectly reasonably. It's also quietly dangerous, because it assumes that "a payment succeeded" is an event that only ever happens once per payment.

@@ -1,3 +1,16 @@
+---
+slug: dlq-reconciliation-business-exceptions
+title: "Reconciliation Is Different: Technical Failures vs Business Exceptions"
+excerpt: >-
+  The most expensive mistake in dead letter queue design: filing an unmatched
+  transaction as an engineering failure when it's actually a normal business
+  result that needs a suspense account, not a bug fix.
+category: infrastructure
+date: 2026-07-17
+tags: [fintech, reconciliation, accounting, distributed-systems]
+series: hardening-the-reconciliation-worker
+part: 7
+---
 # Part 7 — Reconciliation Is Different: Technical Failures vs Business Exceptions
 
 *Hardening the Reconciliation Worker, Part 7 of 7*

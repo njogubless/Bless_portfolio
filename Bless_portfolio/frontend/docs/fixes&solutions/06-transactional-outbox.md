@@ -1,3 +1,16 @@
+---
+slug: changa-transactional-outbox
+title: "What if the process dies mid-payment? The transactional outbox"
+excerpt: >-
+  What happens when your server saves a pending payment and then crashes
+  before calling M-Pesa? Building a transactional outbox so a crash between
+  the two loses nothing.
+category: backend
+date: 2026-04-09
+tags: [changa, distributed-systems, postgresql, outbox-pattern]
+series: changa-engineering-log
+part: 6
+---
 # What if the process dies mid-payment? The transactional outbox
 
 Here's a question worth sitting with: when a member taps "contribute," your server needs to do two things — save a record that a contribution is pending, *and* actually call M-Pesa or Airtel to trigger the STK push on the member's phone. Those two things cannot both happen as a single database transaction, because one of them is a network call to a third party that can take fifteen seconds and can fail in ways entirely outside your control.

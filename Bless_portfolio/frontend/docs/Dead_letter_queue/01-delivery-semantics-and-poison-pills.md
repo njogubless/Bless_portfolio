@@ -1,3 +1,17 @@
+---
+slug: dlq-delivery-semantics-poison-pills
+title: "Delivery Semantics and the Anatomy of a Poison Pill"
+excerpt: >-
+  Before you can design a dead letter queue, you have to be precise about why
+  a message comes back at all. At-least-once delivery, broker-specific
+  redelivery mechanics, and a failure taxonomy that actually drives control
+  flow.
+category: infrastructure
+date: 2026-06-05
+tags: [distributed-systems, celery, rabbitmq, kafka, sqs]
+series: hardening-the-reconciliation-worker
+part: 1
+---
 # Part 1 — Delivery Semantics and the Anatomy of a Poison Pill
 
 *Hardening the Reconciliation Worker, Part 1 of 7*
