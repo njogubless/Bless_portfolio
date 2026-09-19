@@ -1,28 +1,27 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
 import SEO from '../components/SEO'
 import Container from '../components/ui/Container'
 import Reveal from '../components/ui/Reveal'
 import Badge from '../components/ui/Badge'
+import Markdown from '../components/ui/Markdown'
 import { formatDate } from '../lib/utils'
-import posts from '../lib/data/posts'
+import { getNextPost, getPostBySlug, getSeriesNavigation } from '../lib/content/posts'
 import styles from './BlogPost.module.css'
 
 export default function BlogPost() {
   const { slug } = useParams()
-  const post = posts.find((p) => p.slug === slug)
+  const post = getPostBySlug(slug)
 
   // Redirect to a real 404 instead of rendering a blank page for a bad
   // or stale slug (e.g. an old bookmark, or a typo in a shared link).
   if (!post) return <Navigate to="/blog" replace />
 
-  const index = posts.findIndex((p) => p.slug === slug)
-  const next = posts[(index + 1) % posts.length]
+  const series = getSeriesNavigation(post)
+  const next = getNextPost(post)
 
   return (
     <>
-      <SEO path={`/blog/${post.slug}`} title={post.title} description={post.excerpt} />
+      <SEO path={post.route} title={post.title} description={post.excerpt} />
 
       <Container as="article" narrow className={styles.wrap}>
         <Reveal>
@@ -30,10 +29,20 @@ export default function BlogPost() {
 
           <div className={styles.meta}>
             <Badge tone="accent">{post.category}</Badge>
-            <span className={styles.date}>{formatDate(post.createdAt)}</span>
+            <span className={styles.date}>{formatDate(post.date)}</span>
             <span className={styles.dot} aria-hidden="true">·</span>
             <span className={styles.readingTime}>{post.readingTime}</span>
           </div>
+
+          {/* Series context: which part this is, and a way back to the index.
+              Previously a reader landing mid-series had no signal that six
+              other parts existed. */}
+          {series && (
+            <p className={styles.series}>
+              {series.part ? `Part ${series.part} of ${series.total} · ` : 'Series · '}
+              <Link to={series.series.index.route}>{series.series.title}</Link>
+            </p>
+          )}
 
           <h1 className={styles.title}>{post.title}</h1>
           <p className={styles.excerpt}>{post.excerpt}</p>
@@ -51,13 +60,13 @@ export default function BlogPost() {
             so the post looked empty until the reader scrolled. This is the
             content someone opened the page for; it should never be hidden
             on first paint. */}
-        <div className={styles.content}>
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
-        </div>
+        <Markdown className={styles.content}>{post.content}</Markdown>
 
         <Reveal className={styles.nextWrap}>
-          <span className={styles.nextLabel}>Next up</span>
-          <Link to={`/blog/${next.slug}`} className={styles.nextLink}>
+          <span className={styles.nextLabel}>
+            {series?.next ? `Next in ${series.series.title}` : 'Next up'}
+          </span>
+          <Link to={next.route} className={styles.nextLink}>
             {next.title} →
           </Link>
         </Reveal>

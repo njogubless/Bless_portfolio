@@ -9,6 +9,7 @@ import Card from '../components/ui/Card'
 import { cx } from '../lib/utils'
 import experience from '../lib/data/experience'
 import projects, { groups } from '../lib/data/projects'
+import { getPostBySlug } from '../lib/content/posts'
 import styles from './Work.module.css'
 
 // job.accent comes from the data file as 'amber' | 'purple' | 'green'.
@@ -67,6 +68,11 @@ function ExperienceEntry({ job }) {
 }
 
 function ProjectEntry({ project }) {
+  // Resolve the write-up through the posts collection rather than building
+  // a URL from a raw slug: if the article is renamed or unpublished the link
+  // disappears instead of quietly pointing at a redirect to /blog.
+  const writeup = project.writeup ? getPostBySlug(project.writeup.slug) : null
+
   return (
     <Card as="article" interactive className={styles.projectCard}>
       <div className={styles.projectHead}>
@@ -92,8 +98,8 @@ function ProjectEntry({ project }) {
         ) : (
           <span className={styles.projectPrivateNote}>Codebase is private</span>
         )}
-        {project.writeup && (
-          <Link to={`/blog/${project.writeup.slug}`} className={styles.projectLink}>
+        {writeup && (
+          <Link to={writeup.route} className={styles.projectLink}>
             {project.writeup.label} →
           </Link>
         )}

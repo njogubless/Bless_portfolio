@@ -9,7 +9,7 @@ import profile from '../lib/data/profile'
 import { skills } from '../lib/data/about'
 import { featuredProjects } from '../lib/data/projects'
 import experience from '../lib/data/experience'
-import posts from '../lib/data/posts'
+import { getRecentPosts } from '../lib/content/posts'
 import { formatDate } from '../lib/utils'
 import styles from './Home.module.css'
 
@@ -138,10 +138,10 @@ export default function Home() {
             <SectionHeading index={2} eyebrow="From the blog" title="Recent notes" />
           </Reveal>
           <div className={styles.postList}>
-            {posts.slice(0, 3).map((post, i) => (
+            {getRecentPosts(3).map((post, i) => (
               <Reveal as="div" key={post.slug} delay={i * 60}>
-                <Link to={`/blog/${post.slug}`} className={styles.postRow}>
-                  <span className={styles.postDate}>{formatDate(post.createdAt)}</span>
+                <Link to={post.route} className={styles.postRow}>
+                  <span className={styles.postDate}>{formatDate(post.date)}</span>
                   <span className={styles.postTitle}>{post.title}</span>
                   <span className={styles.postArrow} aria-hidden="true">→</span>
                 </Link>
