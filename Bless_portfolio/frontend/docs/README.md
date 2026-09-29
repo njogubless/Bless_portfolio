@@ -87,6 +87,13 @@ ready.
 A file that *has* frontmatter but gets it wrong is a hard error, naming the
 file and the field. It will not build.
 
+**Where to put notes about the codebase.** Frontmatter decides what is
+*published*, but the site still reads every `.md` under `docs/` in order to
+check — so a long internal document, while correctly unpublished, would ride
+along in what visitors download. Put documentation about the project itself
+in `docs/architecture/`, which the loader is told to skip entirely. Articles
+and drafts go anywhere else.
+
 ---
 
 ## Series

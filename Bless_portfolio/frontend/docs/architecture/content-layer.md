@@ -227,6 +227,15 @@ self-demonstrating.
 article and cannot find it on the site, this is why. The authoring guide
 leads with it.
 
+There is also a second-order cost that is easy to miss: skipping happens
+*after* the file has been read, so an unpublished file's text is still pulled
+into the bundle as a raw string before anything decides it is not an article.
+Publishing is therefore correct but bundling is not free. `docs/README.md`
+and `docs/architecture/**` are excluded at the glob for this reason — a
+build concern, deliberately kept separate from the publishing rule — and
+internal documentation belongs under `docs/architecture/` so the exclusion
+does not have to grow.
+
 ### D3 — `slug` is authored in frontmatter, not derived from the filename
 
 **Context.** Deriving the slug from the filename would be one less field.
@@ -484,6 +493,12 @@ gzipped. This was equally true before — the old `Home.jsx` imported the same
 performance item. The fix is [D5](#d5--bodies-load-eagerly): a Vite plugin
 splitting metadata from body, changing `posts.js` and nothing else. Worth
 doing when the corpus roughly doubles.
+
+**An unpublished doc outside `docs/architecture/` still costs bundle size.**
+Nothing fails and nothing is published incorrectly; the file's text is simply
+downloaded and discarded. No test catches it, because the collection legitimately
+reports 24 articles either way. The convention in the authoring guide is the
+only guard.
 
 **Series indexes still hand-write their contents list.** `getSeries()`
 already returns the parts in order; rendering the list from it would remove
