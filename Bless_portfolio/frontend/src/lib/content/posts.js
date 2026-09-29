@@ -15,11 +15,19 @@ import { readingTime, rewriteInternalLinks, stripLeadingHeading } from './markdo
  * line. If the corpus grows enough to matter, only this glob changes —
  * pages call functions, never an array, so nothing below has to move.
  */
-const sources = import.meta.glob('/docs/**/*.md', {
-  query: '?raw',
-  import: 'default',
-  eager: true,
-})
+const sources = import.meta.glob(
+  [
+    '/docs/**/*.md',
+    // Repo documentation, not writing. Frontmatter is what decides whether a
+    // file is *published* (see collection.js) — but a skipped file's text is
+    // still pulled into the bundle as a raw string before anything looks at
+    // it. These two patterns keep notes about the codebase out of the client
+    // download. New internal docs belong under docs/architecture/.
+    '!/docs/README.md',
+    '!/docs/architecture/**',
+  ],
+  { query: '?raw', import: 'default', eager: true }
+)
 
 const ROUTE_PREFIX = '/blog'
 
