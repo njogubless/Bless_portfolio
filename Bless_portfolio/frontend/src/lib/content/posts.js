@@ -1,6 +1,6 @@
 import { defineCollection } from './collection'
 import { field } from './schema'
-import { readingTime, rewriteInternalLinks, stripLeadingHeading } from './markdown'
+import { countWords, readingTime, rewriteInternalLinks, stripLeadingHeading } from './markdown'
 
 /**
  * The blog collection.
@@ -77,6 +77,7 @@ const posts = defineCollection({
       date: data.date,
       tags: data.tags,
       content,
+      words: countWords(content),
       readingTime: readingTime(content),
       route: routeOf(data.slug),
       sourcePath: path,
@@ -174,4 +175,22 @@ export function getNextPost(post) {
   const all = posts.all()
   const index = all.findIndex((candidate) => candidate.slug === post.slug)
   return all[(index + 1) % all.length]
+}
+
+/**
+ * Headline numbers about the body of writing as a whole.
+ *
+ * Derived, so the About page cannot drift out of date as articles are
+ * added — which is the entire reason the blog moved to files.
+ */
+export function getWritingStats() {
+  const all = posts.all()
+  const dates = all.map((post) => post.date).sort()
+  return {
+    articles: all.length,
+    words: all.reduce((total, post) => total + post.words, 0),
+    series: getAllSeries().length,
+    firstPublished: dates[0],
+    lastPublished: dates[dates.length - 1],
+  }
 }

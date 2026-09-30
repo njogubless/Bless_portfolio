@@ -22,6 +22,11 @@ export function stripLeadingHeading(body) {
   return body.replace(/^\s*#\s+.*(\r?\n)+/, '')
 }
 
+/** Count words in a body. Shared by reading time and the writing stats. */
+export function countWords(body) {
+  return body.trim().split(/\s+/).filter(Boolean).length
+}
+
 /**
  * Estimate reading time from word count.
  *
@@ -29,8 +34,7 @@ export function stripLeadingHeading(body) {
  * 117-word note claimed "5 min read". Deriving it means it cannot be wrong.
  */
 export function readingTime(body) {
-  const words = body.trim().split(/\s+/).filter(Boolean).length
-  return `${Math.max(1, Math.round(words / WORDS_PER_MINUTE))} min read`
+  return `${Math.max(1, Math.round(countWords(body) / WORDS_PER_MINUTE))} min read`
 }
 
 /** Resolve a relative href against the directory of `fromPath`. */
