@@ -148,6 +148,7 @@
 }
 
 .statusPrivate { background: var(--color-accent-soft); color: var(--color-accent); }
+.statusActive { background: var(--color-blue-soft); color: var(--color-blue); }
 
 .projectDesc {
   color: var(--color-ink-soft);
