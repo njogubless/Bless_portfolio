@@ -10,6 +10,19 @@
 const projects = [
   // ---- Mobile & Web ----
   {
+    id: 'mwendo',
+    name: 'Mwendo',
+    group: 'mobile-web',
+    period: 'Sep 2026 — present',
+    featured: true,
+    tagline: 'Adaptive daily routine and progress tracking, with reminders planned on the device.',
+    description:
+      'Mwendo is an adaptive routine and personal progress app — set goals, build routines around them, and the app plans each day and tracks what actually happened. Flutter on the front, Django REST Framework over PostgreSQL behind it, organised feature-first on both sides: goals, routines, tracking and insights exist as parallel modules in the app and as separate Django apps in the API. Reminders are scheduled on the phone from the day\'s plan and re-planned whenever goals or routines change, using Android exact alarms so they arrive on the minute rather than minutes late. The API ships a generated OpenAPI schema via drf-spectacular, JWT auth with Argon2 password hashing, and the app resolves its server from one place — a build-time flag, the production URL in release builds, or a developer screen that switches between localhost, a LAN address and production without rebuilding.',
+    stack: ['Flutter', 'Dart', 'Django', 'DRF', 'PostgreSQL', 'JWT', 'OpenAPI', 'Docker'],
+    github: 'https://github.com/njogubless/Mwendo',
+    status: 'in-development',
+  },
+  {
     id: 'changa',
     name: 'Changa',
     group: 'mobile-web',
