@@ -67,6 +67,19 @@ function ExperienceEntry({ job }) {
   )
 }
 
+/**
+ * How each status reads on the card. Previously this was a single ternary
+ * that rendered "✓ shipped" for everything except a private repo — so
+ * `in-production` and `shipped` were indistinguishable, and anything still
+ * being built would have claimed to be finished.
+ */
+const STATUS_LABELS = {
+  'in-production': '✓ in production',
+  shipped: '✓ shipped',
+  'in-development': 'in development',
+  private: 'private repo',
+}
+
 function ProjectEntry({ project }) {
   // Resolve the write-up through the posts collection rather than building
   // a URL from a raw slug: if the article is renamed or unpublished the link
@@ -80,8 +93,14 @@ function ProjectEntry({ project }) {
           <h3 className={styles.projectName}>{project.name}</h3>
           <div className={styles.projectPeriod}>{project.period}</div>
         </div>
-        <span className={cx(styles.status, project.status === 'private' && styles.statusPrivate)}>
-          {project.status === 'private' ? 'private repo' : '✓ shipped'}
+        <span
+          className={cx(
+            styles.status,
+            project.status === 'private' && styles.statusPrivate,
+            project.status === 'in-development' && styles.statusActive
+          )}
+        >
+          {STATUS_LABELS[project.status] ?? project.status}
         </span>
       </div>
       <p className={styles.projectDesc}>{project.description}</p>
