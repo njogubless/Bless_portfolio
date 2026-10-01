@@ -11,8 +11,23 @@ import styles from './Contact.module.css'
 // Configurable per environment (see .env.example) instead of hardcoded,
 // so the same build works against local Django, staging, and prod
 // without a code change.
-const API_BASE = import.meta.env.VITE_API_URL || 'https://api.paulnjogu.com'
+//
+// The fallback is the local dev server, NOT a public domain. It used to be
+// https://api.paulnjogu.com — a domain that does not resolve — so when
+// VITE_API_URL was missing from the Vercel project the production build
+// silently shipped a contact form that could never deliver anything. A
+// fallback pointing at localhost fails obviously in the browser console
+// instead of looking like a working form.
+const API_BASE = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8080'
 const CONTACT_ENDPOINT = `${API_BASE}/api/contact/`
+
+if (import.meta.env.PROD && !import.meta.env.VITE_API_URL) {
+  console.warn(
+    '[contact] VITE_API_URL is not set for this build — the contact form ' +
+      `will post to ${API_BASE} and fail. Set it in the Vercel project's ` +
+      'environment variables.'
+  )
+}
 
 const initialForm = { name: '', email: '', subject: '', body: '', company: '' }
 
