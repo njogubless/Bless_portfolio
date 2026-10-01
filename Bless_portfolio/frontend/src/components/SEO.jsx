@@ -1,7 +1,5 @@
 import { useEffect } from 'react'
-
-const SITE_NAME = 'Paul Njogu'
-const BASE_URL = 'https://paulnjogu.com'
+import { SITE_NAME, SITE_URL } from '../lib/site'
 
 function setMeta(name, content, attr = 'name') {
   if (!content) return
@@ -29,12 +27,12 @@ export default function SEO({ title, description, path = '' }) {
     setMeta('description', description)
     setMeta('og:title', fullTitle, 'property')
     setMeta('og:description', description, 'property')
-    setMeta('og:url', `${BASE_URL}${path}`, 'property')
+    setMeta('og:url', `${SITE_URL}${path}`, 'property')
     setMeta('twitter:title', fullTitle)
     setMeta('twitter:description', description)
 
     let canonical = document.head.querySelector('link[rel="canonical"]')
-    if (canonical) canonical.setAttribute('href', `${BASE_URL}${path}`)
+    if (canonical) canonical.setAttribute('href', `${SITE_URL}${path}`)
   }, [title, description, path])
 
   return null
