@@ -197,12 +197,22 @@ python manage.py runserver 8080
 
 ### Environment variables
 
-Create `backend/portfolio_backend/.env`:
+```bash
+cd backend/portfolio_backend
+cp .env.example .env
+```
+
+Then fill in `.env` (see `.env.example` for the full list with comments):
 ```env
 SECRET_KEY=your-secret-key-here
 DEBUG=True
 DATABASE_URL=           # leave empty for SQLite locally
+EMAIL_HOST_USER=        # only needed to test contact-form notification emails
+EMAIL_HOST_PASSWORD=    # Gmail "App Password", not your real password
 ```
+
+`SECRET_KEY` is required whenever `DEBUG=False` — the app raises on startup
+instead of falling back to a hardcoded key.
 
 ---
 
