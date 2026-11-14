@@ -10,6 +10,32 @@
 const projects = [
   // ---- Mobile & Web ----
   {
+    id: 'sovereign-wallet',
+    name: 'Sovereign Trust Wallet',
+    group: 'mobile-web',
+    period: 'Oct 2026 — present',
+    featured: true,
+    tagline: 'Mobile wallet for Kenya on a double-entry ledger, with M-Pesa and Airtel Money rails.',
+    description:
+      'Sovereign Trust is a mobile wallet platform for Kenya: a Go backend over a PostgreSQL double-entry ledger, M-Pesa Daraja and Airtel Money adapters, and a Flutter customer app alongside an operations console. Balances are a trigger-maintained projection of an append-only ledger, and the database itself rejects overdrafts, unbalanced journals and direct balance writes. Every money-moving request is idempotent, with the key completed in the same transaction as the money movement. Provider calls go through a transactional outbox, uncertain outcomes are never retried blindly, and held funds are released only on a definitive failure. Callbacks are treated as hints, with outcomes confirmed through authenticated status queries. Staff can never edit balances: adjustments and reversals are reason-coded, maker-checker, audited journals. It currently runs end-to-end against a deterministic payment simulator; the provider adapters have not yet been run against the live sandboxes.',
+    stack: ['Go', 'Flutter', 'Dart', 'PostgreSQL', 'Redis', 'M-Pesa Daraja', 'Airtel Money API', 'OpenAPI', 'Docker'],
+    github: 'https://github.com/njogubless/wallet',
+    status: 'in-development',
+  },
+  {
+    id: 'service-desk',
+    name: 'Service Desk',
+    group: 'mobile-web',
+    period: 'Oct 2026',
+    featured: true,
+    tagline: 'Multi-tenant IT service desk with change approvals and business-hours SLAs.',
+    description:
+      'An IT service management system covering incidents, service requests, change requests with approval gates, and problem records, all routed to teams, measured against SLAs and linked to the equipment they concern. The Go backend follows a strict hexagonal layout: the domain and use-case layers compile and test with no database or network, and every adapter is wired in a single composition root. Priority is derived from an impact × urgency matrix rather than picked by hand. Change requests must collect a decision from every approver, and self-approval is rejected by both the domain and a database constraint. SLAs run in business hours, are DST- and holiday-aware, and pause while a ticket waits on someone outside the desk. Tenant isolation is structural: every repository read takes the organisation ID from the access token. Internal notes are filtered in SQL, the audit log is append-only at the database level, and refresh tokens rotate with reuse detection. The React and TypeScript frontend gets live updates over WebSockets.',
+    stack: ['Go', 'React', 'TypeScript', 'PostgreSQL', 'WebSockets', 'JWT', 'Docker'],
+    github: 'https://github.com/njogubless/Go-Ticketing',
+    status: 'shipped',
+  },
+  {
     id: 'mwendo',
     name: 'Mwendo',
     group: 'mobile-web',
