@@ -22,8 +22,8 @@ export const capabilities = [
     area: 'Backend',
     summary: 'APIs that stay correct under retries.',
     detail:
-      'Django and FastAPI over PostgreSQL. Append-only ledgers, database-enforced idempotency, transactional outboxes, authenticated payment callbacks, JWT auth.',
-    stack: ['Python', 'Django', 'FastAPI', 'PostgreSQL', 'REST APIs'],
+      'Go, Django and FastAPI over PostgreSQL. Append-only ledgers, database-enforced idempotency, transactional outboxes, authenticated payment callbacks, JWT auth.',
+    stack: ['Go', 'Python', 'Django', 'FastAPI', 'PostgreSQL', 'REST APIs'],
     tone: 'green',
   },
   {
