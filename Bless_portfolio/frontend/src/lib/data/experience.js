@@ -3,6 +3,27 @@
 
 const experience = [
   {
+    id: 'ikoo',
+    company: 'IK-OO Properties',
+    role: 'Consultant',
+    type: 'Contract',
+    period: 'Oct 2026 — present',
+    location: 'Remote',
+    accent: 'green',
+    summary:
+      'Brought a property client\'s Flutter app from a risky codebase to a signed, production-ready release, and handed it over with documentation their team can build on.',
+    achievements: [
+      'Removed embedded credentials from the app and introduced encrypted session storage, closing the main security risks before public release.',
+      'Re-architected the codebase into a modular, feature-based structure, shortening feature delivery for future developers.',
+      'Took static analysis from 99 warnings to zero, and added 92 automated tests with a CI pipeline that blocks faulty changes before release.',
+      'Cut image memory use by roughly 95% per image by loading photos at display size, smoothing scrolling and reducing crashes on low-end devices.',
+      'Diagnosed a backend response bottleneck (19 MB per app launch) and delivered a fix plan cutting it to about 30 KB, with load times dropping from up to 60 seconds to under 1 second.',
+      'Removed about 10,000 lines of unused code and dependencies, lowering maintenance cost and build size.',
+      'Delivered a signed, device-tested release build with a production-readiness report and handover documentation.',
+    ],
+    stack: ['Flutter', 'Dart', 'Secure Storage', 'CI/CD', 'Automated Testing', 'Static Analysis'],
+  },
+  {
     id: 'salamander',
     company: 'Salamander Tech-Hub',
     role: 'Lead Backend Developer',
